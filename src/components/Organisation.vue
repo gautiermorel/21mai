@@ -13,7 +13,7 @@
 import Headline from "@/components/Headline.vue";
 
 export default {
-	name: 'Process',
+	name: 'Organisation',
 	components: {
 		Headline,
 	},

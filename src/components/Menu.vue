@@ -9,11 +9,11 @@
 	<nav v-if="isAuthenticated" class="header__nav">
 		<div class="dropdown d-none d-lg-block">
 			<router-link to="/" class="header__nav-item" data-bs-toggle="dropdown">
-				<Avatar class="profile-picture__img" :username="currentGuest.firstName" :inline="true" :size="40" />
+				<Avatar class="profile-picture__img" :username="currentUser.firstName" :inline="true" :size="40" />
 				Accueil
 			</router-link>
 			<div class="navbar__dropdown dropdown-menu dropdown-menu-right">
-				<div class="navbar__dropdown-item navbar__title">{{currentGuest.firstName}} {{currentGuest.lastName}}</div>
+				<div class="navbar__dropdown-item navbar__title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
 				<a class="navbar__dropdown-item dropdown-item" rel="nofollow" data-method="delete" href="#" @click="onLogout">
 					<unicon class="navbar__icon navbar__icon--with-text" viewBox="0 0 512 512" name="go-sign-out" />
 					Déconnexion
@@ -116,9 +116,9 @@ export default {
 	},
 	computed: {
 		isAuthenticated: () => store.getters.isAuthenticated,
-		currentGuest: () => store.getters.getGuest,
+		currentUser: () => store.getters.getUser,
 		username: () => {
-			const { firstName, lastName, name } = store.getters.getGuest
+			const { firstName, lastName, name } = store.getters.getUser
 			if (!firstName && !lastName) return name
 			return `${firstName}${lastName}`
 		}

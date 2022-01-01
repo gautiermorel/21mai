@@ -4,7 +4,7 @@ import router from "@/router";
 
 export default createStore({
 	state: {
-		guest: localStorage.getItem('may21_guest') && JSON.parse(localStorage.getItem('may21_guest')) || {},
+		user: localStorage.getItem('may21_user') && JSON.parse(localStorage.getItem('may21_user')) || {},
 		token: localStorage.getItem('may21_token') || '',
 		expiration: localStorage.getItem('may21_token_expiration') || Date.now(),
 		isBusy: false,
@@ -15,9 +15,9 @@ export default createStore({
 		clearBusy: (state) => state.isBusy = false,
 		setError: (state, error) => state.error = error,
 		clearError: (state) => state.error = "",
-		setGuest: (state, guest) => {
-			state.guest = guest;
-			localStorage.setItem('may21_guest', JSON.stringify(guest))
+		setUser: (state, user) => {
+			state.user = user;
+			localStorage.setItem('may21_user', JSON.stringify(user))
 		},
 		setToken: (state, auth) => {
 			state.token = auth.token;
@@ -29,13 +29,13 @@ export default createStore({
 		clearToken: (state) => {
 			state.token = "";
 			state.expiration = Date.now();
-			localStorage.setItem('may21_guest', "")
+			localStorage.setItem('may21_user', "")
 			localStorage.setItem('may21_token', "")
 			localStorage.setItem('may21_token_expiration', Date.now())
 		}
 	},
 	getters: {
-		getGuest: (state) => (state && state.guest) || {},
+		getUser: (state) => (state && state.user) || {},
 		isAuthenticated: (state) => state.token.length > 0 && new Date(state.expiration) > Date.now()
 	},
 	actions: {
@@ -48,7 +48,7 @@ export default createStore({
 
 				if (result.data.auth.token) {
 					commit("setToken", result.data.auth);
-					commit("setGuest", result.data.guest);
+					commit("setUser", result.data.user);
 					router.push("/");
 				}
 				else {
@@ -69,7 +69,7 @@ export default createStore({
 
 				if (result.data.auth.token) {
 					commit("setToken", result.data.auth);
-					commit("setGuest", result.data.guest);
+					commit("setUser", result.data.user);
 					router.push("/");
 				}
 				else {

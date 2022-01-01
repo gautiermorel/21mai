@@ -4,7 +4,7 @@
 	<section v-if="!isAuthenticated">
 		<Welcome />
 		<Login />
-		<Process />
+		<Organisation />
 		<Housing />
 		<Trip />
 		<Wishlist />
@@ -12,7 +12,7 @@
 
 	<section v-if="isAuthenticated">
 		<Status />
-		<Process />
+		<Organisation />
 		<Housing />
 		<Trip />
 		<Wishlist />
@@ -25,6 +25,7 @@ import store from '@/store';
 
 import Login from "@/components/Login.vue";
 import Housing from '@/components/Housing.vue';
+import Organisation from '@/components/Organisation.vue';
 import Menu from "@/components/Menu.vue";
 import Status from '@/components/Status.vue';
 import Trip from '@/components/Trip.vue';
@@ -35,7 +36,7 @@ export default {
 	name: "Home",
 	components: {
 		Login,
-		Housing,
+		Organisation,
 		Menu,
 		Status,
 		Trip,

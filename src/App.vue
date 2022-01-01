@@ -34,7 +34,7 @@ export default {
 			error: computed(() => store.state.error),
 			isAuthenticated: computed(() => store.getters.isAuthenticated),
 			onLogout: () => store.dispatch("logout"),
-			currentGuest: computed(() => store.getters.getGuest),
+			currentUser: computed(() => store.getters.getUser),
 		};
 	},
 };
