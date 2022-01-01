@@ -18,6 +18,7 @@ export default { name: 'Header' }
 }
 
 .header {
+  margin-top: 50px;
 	display: flex;
 	flex-direction: row;
 	width: 100%;
