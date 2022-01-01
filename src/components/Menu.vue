@@ -1,14 +1,10 @@
 <template>
 	<nav class="header__nav">
 		<router-link to="/" class="header__nav-item">Accueil</router-link>
-		<router-link to="/cours" class="header__nav-item">Apprendre</router-link>
-		<router-link to="/creations" class="header__nav-item">Découvrir</router-link>
-		<router-link to="/a-propos" class="header__nav-item">à propos</router-link>
-		<router-link to="/contact" class="header__nav-item">Contact</router-link>
-		<div class="header__social" @click="openURL('https://www.facebook.com/modelagedelaterre')">
-			<v-icon name="instagram" base-class="instagram-icon"></v-icon>
-			<v-icon name="facebook" base-class="facebook-icon"></v-icon>
-		</div>
+		<router-link to="#welcome" class="header__nav-item">Info Pratiques</router-link>
+		<router-link to="#logements" class="header__nav-item">Logements</router-link>
+		<router-link to="#transport" class="header__nav-item">Transport</router-link>
+		<router-link to="#liste" class="header__nav-item">Liste de mariage</router-link>
 	</nav>
 	<nav class="mobile-nav">
 		<ul class="mobile-nav__list">

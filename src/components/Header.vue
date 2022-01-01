@@ -32,7 +32,6 @@ export default { name: 'Header' }
 		align-content: center;
 		justify-content: center;
 		font-family: "Exmouth";
-		margin-bottom: 100px;
 
 		h1 {
 			font-weight: bold;

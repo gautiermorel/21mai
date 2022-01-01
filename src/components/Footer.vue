@@ -4,9 +4,11 @@
 			<hr />
 			<div class="row pb-3 align-items-center">
 				<div class="col-12 col-md-6 text-center text-md-left">
-					<p class="footer__copyright mb-0">© 2021 Doussay.com - Tous droits réservés</p>
+					<p class="footer__copyright mb-0">© 2022 - 21mai.be</p>
 				</div>
-				<div class="col-12 col-md-6 text-center text-md-right d-flex justify-content-between"><a class="footer__link footer__link--smaller my-2 my-md-0" href="#">Conditions générales d'utilisation</a><a class="footer__link footer__link--smaller ml-md-4 my-2 my-md-0" href="#">Politique de confidentialité</a><a class="footer__link footer__link--smaller ml-md-4 my-2 my-md-0" href="#">Mentions légales</a></div>
+				<div class="col-12 col-md-6 text-center text-md-right d-flex justify-content-end">
+					<a class="footer__link footer__link--smaller ml-md-4 my-2 my-md-0" href="#">Liste de mariage</a>
+				</div>
 			</div>
 		</div>
 	</footer>
