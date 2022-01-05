@@ -2,38 +2,52 @@
 	<div class="container col-md-8 col-lg-5 col-sm-10 px-4 text-center">
 		<Headline anchor="status" title="Informations vous concernant" />
 
-		<p>Bonjour {{currentUser.firstName}}, nous sommes très heureux de pouvoir vous inviter à notre {{guest.invitation || '_______'}} de notre mariage !</p>
+		<p>Bonjour {{currentUser.username}}, dites nous vite si nous aurons la chance de vous voir à notre mariage !</p>
+		<p>nous vous invitons également à répondre pour vos proches:</p>
 
-		<div class="status__address">
-			<div v-if="guest.websiteAddress">
-				<p>Voici l'adresse postale que vous nous avez transmis par via notre site web:</p>
-				<p style="white-space: pre;">{{guest.websiteAddress}}</p>
-			</div>
-			<div v-else-if="guest.address">
-				<p>Voici l'adresse postale que nous avons pour vous:</p>
-				<p>{{guest.address}}</p>
-			</div>
-			<div v-else>
-				<p>Nous ne connaissons pas encore votre adresse ! Donnez nous la vite ! :)</p>
+		<b-list-group>
+			<b-list-group-item class="d-flex justify-content-between align-items-center" v-for="relation in guest.relations" :key="relation._id">
+				<div class="d-flex w-100">
+					<div class="d-flex p-2">
+						<Avatar class="p-col profile-picture profile-picture--small" :username="relation.firstName" :inline="true" :size="40" />
+					</div>
+					<div class="d-flex flex-column align-items-start p-2 w-100">
+						<span>{{relation.username}}</span>
+						<small>Invitation à notre {{relation.invitation}} de mariage</small>
+					</div>
+				</div>
+				<div class="d-flex w-100 justify-content-end">
+					<div v-if="!relation.websiteAnswer" class="d-flex flex-row justify-content-end w-100">
+						<Button label="PRESENT" icon="pi pi-times" class="p-button-primary m-1" @click="updateAnswer(relation._id, 'PRESENT')" />
+						<Button label="ABSENT" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(relation._id, 'ABSENT')" />
+					</div>
+					<div class="d-flex flex-column align-items-end p-2 w-100" v-if="relation.websiteAnswer">
+						<span>Réponse: {{relation.websiteAnswer}}</span>
+						<small>{{humanDate(relation.logs?.find(l => l.action === 'websiteAnswer')?.when)}}</small>
+            <small>Facebook|Lettre|Site web</small>
+					</div>
+				</div>
+			</b-list-group-item>
+		</b-list-group>
 
-				<Textarea v-model="websiteAddress" :autoResize="true" rows="5" cols="30" />
+		<br />
+		<br />
+		<br />
 
-				<Button label="Mettre à jour mon adresse" @click="updateAddress()" />
+		<b-card title="Adresse postale" sub-title="Nous avons besoin de votre adresse pour que nous puissons envoyer notre faire-part :)">
+			<b-card-text v-if="!editing.address && (guest.address || guest.websiteAddress)" class="d-flex flex-column">
+				<div style="white-space: pre;">{{guest.websiteAddress || guest.address}}</div>
+			</b-card-text>
 
-			</div>
-		</div>
-
-		<!-- <p>Nous vous avons envoyé un faire-part le 24 janvier 2022</p> -->
-
-		<p>Nous n'avons pas encore de réponse de votre part:</p>
-		<p>Viendrez-vous au mariage ?</p>
-		<div class="answer">
-			<div class="answer-buttons">
-				<Button label="PRESENT" icon="pi pi-times" class="p-button-primary" @click="removeList('')" />
-				<Button label="ABSENT" icon="pi pi-times" class="p-button-danger" @click="removeList('')" />
-			</div>
-		</div>
-
+			<b-card-text v-if="editing.address || (!guest.address && !guest.websiteAddress)" class="d-flex flex-column">
+				<Textarea v-model="guest.websiteAddress" :autoResize="true" rows="5" cols="30" />
+				<div class="d-flex w-100 justify-content-between align-items-center">
+					<Button class="p-button-danger m-1" label="Annuler" @click="editing.address = false" />
+          <Button label="Mettre à jour mon adresse" class="p-button-primary m-1" @click="updateAddress()" />
+				</div>
+			</b-card-text>
+			<Button label="Modifier votre adresse" v-if="!editing.address" @click="isEditing('address', true)" class="card-link p-button-link" />
+		</b-card>
 	</div>
 
 	<ConfirmDialog></ConfirmDialog>
@@ -44,6 +58,8 @@
 import store from '@/store';
 import fetchApi from "@/services/http";
 
+import moment from 'moment'
+import Avatar from "@/components/Avatar.vue";
 import Headline from "@/components/Headline.vue";
 import Button from 'primevue/button';
 import Textarea from 'primevue/textarea';
@@ -53,43 +69,43 @@ import { useConfirm } from "primevue/useconfirm";
 export default {
 	name: 'Status',
 	components: {
+		Avatar,
 		ConfirmDialog,
 		Textarea,
 		Headline,
 		Button,
 	},
+	created () {
+		this.moment = moment;
+	},
 	setup () {
 		const confirm = useConfirm();
 		return { confirm }
 	},
-	// emits: {
-	// 	onRemoveList: (listId) => {
-	// 		if (listId) {
-	// 			console.log('contract:', listId)
-	// 			return true
-	// 		} else {
-	// 			console.warn('Invalid submit event payload!')
-	// 			return false
-	// 		}
-	// 	}
-	// },
 	methods: {
-		removeList (listId) {
+		isEditing (field, value) {
+			this.editing[field] = value
+		},
+
+		async updateAnswer (guestId, value) {
 			this.confirm.require({
 				message: 'Afin d\'être pleinnement capable de nous organiser, nous attendons de vous une réponse définitive !',
 				header: 'Etes vous sûr ?',
 				icon: 'pi pi-exclamation-triangle',
-				accept: () => {
-					console.log('accept', listId)
-					// this.$emit('onRemoveList', listId)
+				accept: async () => {
+					await fetchApi().put(`/guests/${guestId}`, { field: 'websiteAnswer', value })
+					this.$notify({ title: 'Merci', message: "Merci de votre réponse !", type: 'success' });
+					this.guest = await this.getGuest(this.currentUser._id);
 				},
 				reject: () => { }
 			});
 		},
 
 		async updateAddress () {
-			await fetchApi().put(`/guests/${this.guest._id}`, { field: 'websiteAddress', value: this.websiteAddress })
+			this.editing.address = false
+			await fetchApi().put(`/guests/${this.guest._id}`, { field: 'websiteAddress', value: this.guest.websiteAddress, multi: true })
 			this.$notify({ title: 'Merci', message: "Votre adresse nous a bien été transmise ! Merci !", type: 'success' });
+			this.guest = await this.getGuest(this.currentUser._id);
 		},
 
 		async getGuest (guestId) {
@@ -101,15 +117,18 @@ export default {
 	computed: {
 		isAuthenticated: () => store.getters.isAuthenticated,
 		currentUser: () => store.getters.getUser,
+		humanDate: () => value => `Le ${moment(value, null, 'fr').format('DD MMMM YYYY à HH:mm')}`
 	},
 	data () {
 		return {
 			guest: {},
-			websiteAddress: null,
+			editing: {
+				address: false,
+			}
 		}
 	},
 	async mounted () {
-		this.guest = await this.getGuest(this.currentUser._id);
+		this.guest = await this.getGuest(this.currentUser._id)
 	}
 }
 </script>
@@ -129,5 +148,15 @@ export default {
 		align-items: center;
 		justify-items: center;
 	}
+}
+.status-address {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+}
+
+.p-inputtextarea {
+  text-align: center;
 }
 </style>
