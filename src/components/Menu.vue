@@ -9,7 +9,7 @@
 	<nav v-if="isAuthenticated" class="header__nav">
 		<div class="dropdown d-none d-lg-block">
 			<router-link to="/" class="header__nav-item" data-bs-toggle="dropdown">
-				<Avatar class="profile-picture__img" :username="currentUser.firstName" :inline="true" :size="40" />
+				<!-- <Avatar class="profile-picture__img" :username="currentUser.firstName" :inline="true" :size="40" /> -->
 				Accueil
 			</router-link>
 			<div class="navbar__dropdown dropdown-menu dropdown-menu-right">
