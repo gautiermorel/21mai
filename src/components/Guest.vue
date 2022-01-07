@@ -12,8 +12,8 @@
 		<div class="d-flex justify-content-end">
 			<div v-if="!guest.websiteAnswer" class="d-flex flex-row justify-content-end w-100">
 				<div v-if="inviations[guest.invitation]" class="d-flex flex-column w-100 align-content-end">
-					<SelectButton class="d-flex flex-row w-100 p-1" v-model="guest.answerKind" :options="inviations[guest.invitation]" optionLabel="type" :multiple="true" />
-					<Button v-if="guest.answerKind && guest.answerKind.length > 0" :label="`PRESENT (${guest.answerKind.map(a => a.type).join(', ')})`" class="p-button-primary m-1" @click="updateAnswer(guest._id, `PRESENT (${guest.answerKind.map(a => a.type).join(', ')})`)" />
+					<SelectButton class="d-flex flex-row w-100 p-1" v-model="answerKind" :options="inviations[guest.invitation]" optionLabel="type" :multiple="true" />
+					<Button v-if="answerKind && answerKind.length > 0" :label="`PRESENT (${answerKind.map(a => a.type).join(', ')})`" class="p-button-primary m-1" @click="updateAnswer(guest._id, `PRESENT (${answerKind.map(a => a.type).join(', ')})`)" />
 					<Button v-else label="ABSENT" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(guest._id, 'ABSENT')" />
 				</div>
 
@@ -29,80 +29,39 @@
 			</div>
 		</div>
 	</div>
-	<ConfirmDialog></ConfirmDialog>
 </template>
 
 <script>
-import store from '@/store';
-import fetchApi from "@/services/http";
-
 import moment from 'moment'
 import Avatar from "@/components/Avatar.vue";
 import Button from 'primevue/button';
 import SelectButton from 'primevue/selectbutton';
-import ConfirmDialog from 'primevue/confirmdialog';
-import { useConfirm } from "primevue/useconfirm";
 
 export default {
 	name: 'Status',
 	components: {
 		Avatar,
-		ConfirmDialog,
 		Button,
 		SelectButton,
+	},
+	props: {
+		guest: {}
 	},
 	created () {
 		this.moment = moment;
 	},
-	setup () {
-		const confirm = useConfirm();
-		return { confirm }
-	},
+	emits: ['update:answer'],
 	methods: {
 		isEditing (field, value) {
 			this.editing[field] = value
 		},
 
-		async updateAnswer (guestId, value) {
-			this.confirm.require({
-				message: 'Afin d\'être pleinnement capable de nous organiser, nous attendons de vous une réponse définitive !',
-				header: 'Etes vous sûr ?',
-				icon: 'pi pi-exclamation-triangle',
-				accept: async () => {
-					await fetchApi().put(`/guests/${guestId}`, { field: 'websiteAnswer', value, saveDate: true })
-					this.$notify({ title: 'Merci', message: "Merci de votre réponse !", type: 'success' });
-					this.guest = await this.getGuest(this.currentUser._id);
-				},
-				reject: () => { }
-			});
-		},
-
-		async updateAddress () {
-			this.editing.address = false
-			const multi = this.guest.relations.length > 0
-			await fetchApi().put(`/guests/${this.guest._id}`, { field: 'websiteAddress', value: this.guest.websiteAddress, multi })
-			this.$notify({ title: 'Merci', message: "Votre adresse nous a bien été transmise ! Merci !", type: 'success' });
-			this.guest = await this.getGuest(this.currentUser._id);
-		},
-
-		async updateComment () {
-			this.editing.comment = false
-			await fetchApi().put(`/guests/${this.guest._id}`, { field: 'comment', value: this.guest.comment })
-			this.$notify({ title: 'Merci', message: "Votre commentaire nous a bien été transmise ! Merci !", type: 'success' });
-			this.guest = await this.getGuest(this.currentUser._id);
-		},
-
-		async getGuest (guestId) {
-			let { data: guest = {} } = await fetchApi().get(`/guests/${guestId}`)
-
-			return guest;
+		updateAnswer (guestId, value) {
+			this.$emit('update:answer', { guestId, value })
 		},
 	},
 	computed: {
-		isAuthenticated: () => store.getters.isAuthenticated,
-		currentUser: () => store.getters.getUser,
 		humanDate: () => value => `Fait le ${moment(value, null, 'fr').format('DD MMMM YYYY à HH:mm')}`,
-		hasRelations: () => guest => guest.relations?.length > 0,
 	},
 	data () {
 		return {
@@ -117,16 +76,9 @@ export default {
 					{ type: 'SOIREE', code: 'soiree' },
 				],
 			},
-			guest: {},
-			editing: {
-				address: false,
-				comment: false,
-			}
+			answerKind: null,
 		}
 	},
-	async mounted () {
-		this.guest = await this.getGuest(this.currentUser._id)
-	}
 }
 </script>
 
