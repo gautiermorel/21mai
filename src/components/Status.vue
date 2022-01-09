@@ -1,5 +1,5 @@
 <template>
-	<div class="container col-md-8 col-lg-7 col-sm-10 px-4 text-center">
+	<div class="container col-sm-8 col-md-8 col-lg-6 col-sm-10 px-4 text-center">
 		<Headline anchor="status" title="Informations vous concernant" />
 
 		<p>Bonjour {{currentUser.username}}, dites nous vite si nous aurons la chance de vous voir à notre mariage !</p>
@@ -11,8 +11,8 @@
 		<div v-if="hasRelations(guest)">Vous pouvez également répondre pour vos proches:</div>
 
 		<b-list-group v-if="hasRelations(guest)">
-			<b-list-group-item class="d-flex justify-content-between align-items-center" v-for="relation in guest.relations" :key="relation._id">
-				<Guest :guest="guest" @update:answer="updateAnswer" />
+			<b-list-group-item v-for="relation in guest.relations" :key="relation._id">
+				<Guest :guest="relation" @update:answer="updateAnswer" />
 			</b-list-group-item>
 		</b-list-group>
 
@@ -27,10 +27,10 @@
 			</b-card-text>
 
 			<b-card-text v-if="editing.address || (!guest.address && !guest.websiteAddress)" class="d-flex flex-column">
-				<Textarea v-model="guest.websiteAddress" :autoResize="true" rows="5" cols="30" />
-				<div class="d-flex w-100 justify-content-between align-items-center">
+				<Textarea v-model="guest.websiteAddress" :autoResize="false" rows="5" cols="30" @click="editing.address=true" />
+				<div class="d-flex w-100 justify-content-center align-items-center">
 					<Button class="p-button-danger m-1" label="Annuler" @click="editing.address = false" />
-					<Button label="Mettre à jour mon adresse" class="p-button-primary m-1" @click="updateAddress(false)" />
+					<Button label="Confirmer" class="p-button-warning m-1" @click="updateAddress(false)" />
 				</div>
 			</b-card-text>
 			<Button label="Modifier votre adresse" v-if="!editing.address" @click="isEditing('address', true)" class="card-link p-button-link" />
@@ -46,10 +46,10 @@
 			</b-card-text>
 
 			<b-card-text v-if="editing.comment || !guest.comment" class="d-flex flex-column">
-				<Textarea v-model="guest.comment" :autoResize="true" rows="5" cols="30" />
-				<div class="d-flex w-100 justify-content-between align-items-center">
+				<Textarea v-model="guest.comment" :autoResize="false" rows="5" cols="30" @click="editing.comment=true" />
+				<div class="d-flex w-100 justify-content-center align-content-center align-items-center">
 					<Button class="p-button-danger m-1" label="Annuler" @click="editing.comment = false" />
-					<Button label="Mettre à jour mon commentaire" class="p-button-primary m-1" @click="updateComment()" />
+					<Button label="Confirmer" class="p-button-warning m-1" @click="updateComment()" />
 				</div>
 			</b-card-text>
 			<Button label="Modifier votre commentaire" v-if="!editing.comment" @click="isEditing('comment', true)" class="card-link p-button-link" />

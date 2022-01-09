@@ -1,28 +1,28 @@
 <template>
-	<div class="d-flex flex-column justify-content-between align-items-center">
-		<div class="d-flex w-100">
+	<div class="d-flex flex-md-row flex-column align-items-center justify-content-md-between">
+		<div class="d-flex">
 			<div class="d-flex p-2">
 				<Avatar class="p-col profile-picture profile-picture--small" :username="guest.firstName" :inline="true" :size="40" />
 			</div>
 			<div class="d-flex text-left flex-column align-items-start p-2 w-100">
 				<span>{{guest.username}}</span>
-				<small>Invitation à notre {{guest.invitation}} de mariage</small>
+				<small>Invitation à notre {{invitations[guest.invitation]?.map(t => t.type).join(', ') || guest.inviation}} de mariage</small>
 			</div>
 		</div>
-		<div class="d-flex justify-content-end">
-			<div v-if="!guest.websiteAnswer" class="d-flex flex-row justify-content-end w-100">
-				<div v-if="inviations[guest.invitation]" class="d-flex flex-column w-100 align-content-end">
-					<SelectButton class="d-flex flex-row w-100 p-1" v-model="answerKind" :options="inviations[guest.invitation]" optionLabel="type" :multiple="true" />
-					<Button v-if="answerKind && answerKind.length > 0" :label="`PRESENT (${answerKind.map(a => a.type).join(', ')})`" class="p-button-primary m-1" @click="updateAnswer(guest._id, `PRESENT (${answerKind.map(a => a.type).join(', ')})`)" />
+		<div class="d-flex">
+			<div v-if="!guest.websiteAnswer" class="d-flex">
+				<div v-if="invitations[guest.invitation]" class="d-flex flex-column w-100">
+					<SelectButton class="p-selectbutton-warning d-flex flex-row w-100 p-1" v-model="answerKind" :options="invitations[guest.invitation]" optionLabel="type" :multiple="true" />
+					<Button v-if="answerKind && answerKind.length > 0" :label="`PRESENT (${answerKind.map(a => a.type).join(', ')})`" class="p-button-warning m-1" @click="updateAnswer(guest._id, `PRESENT (${answerKind.map(a => a.type).join(', ')})`)" />
 					<Button v-else label="ABSENT" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(guest._id, 'ABSENT')" />
 				</div>
 
-				<div v-else class="d-flex flex-xl-row flex-column justify-content-end">
-					<Button label="PRESENT" icon="pi pi-times" class="p-button-primary m-1" @click="updateAnswer(guest._id, `PRESENT (${guest.invitation})`)" />
+				<div v-else class="d-flex p-3">
+					<Button label="PRESENT" icon="pi pi-times" class="p-button-warning m-1" @click="updateAnswer(guest._id, `PRESENT (${guest.invitation})`)" />
 					<Button label="ABSENT" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(guest._id, 'ABSENT')" />
 				</div>
 			</div>
-			<div class="d-flex flex-column align-items-end p-2 w-100" v-if="guest.websiteAnswer">
+			<div class="d-flex flex-column align-items-md-end align-items-center" v-if="guest.websiteAnswer">
 				<span class="answer-text">{{guest.websiteAnswer}}</span>
 				<small>{{humanDate(guest.answerDate)}}</small>
 				<small>Type de réponse: {{guest.answerType || (guest.websiteAnswer ? 'site web' : 'en direct')}}</small>
@@ -65,7 +65,7 @@ export default {
 	},
 	data () {
 		return {
-			inviations: {
+			invitations: {
 				'DINER': [
 					{ type: 'COCKTAIL', code: 'soiree' },
 					{ type: 'DINER', code: 'diner' },

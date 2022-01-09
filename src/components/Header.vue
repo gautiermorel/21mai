@@ -52,7 +52,7 @@ export default {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	justify-content: end;
+	justify-content: flex-end;
 	align-content: center;
 	padding-top: 30px;
 	padding-right: 50px;
