@@ -2,12 +2,12 @@
 	<Menu />
 
 	<section v-if="!isAuthenticated">
-		<Welcome />
+		<!-- <Welcome /> -->
 		<Login />
-		<Organisation />
-		<Housing />
-		<Trip />
-		<Wishlist />
+		<!-- <Organisation /> -->
+		<!-- <Housing /> -->
+		<!-- <Trip /> -->
+		<!-- <Wishlist /> -->
 	</section>
 
 	<section v-if="isAuthenticated">

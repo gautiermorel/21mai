@@ -44,8 +44,6 @@
 		</div>
 	</nav>
 
-	<!-- <VueBottomNavigation :options="options" v-model="selected" foregroundColor="#FFFFFF" badgeColor="red" /> -->
-
 	<VueBottomNavigation class="bottom__navigation" :options="options" v-model="selected" foregroundColor="#FFFFFF" badgeColor="red">
 		<template #icon="{ props }">
 			<unicon class="navbar__icon navbar__icon--with-text" :viewBox="props.viewBox" :name="props.icon" />
@@ -97,21 +95,21 @@ export default {
 				title: "Invités",
 				badge: 0
 			},
-      {
+			{
 				id: 4,
 				icon: "go-music",
 				viewBox: '10 0 512 512',
 				title: "Playlist",
 				badge: 0
 			},
-      {
+			{
 				id: 5,
 				icon: "go-picture",
 				viewBox: '0 0 576 512',
 				title: "Photos",
 				badge: 0
 			},
-      {
+			{
 				id: 6,
 				icon: "go-chair",
 				viewBox: '0 0 448 512',
@@ -129,13 +127,19 @@ export default {
 	src: local("Optima"), url(/fonts/optima.ttf) format("truetype");
 }
 
+@media (min-width: 992px) {
+	.bottom__navigation {
+		display: none;
+	}
+}
+
 .hello {
-  display: none;
-  flex-direction: row;
-  align-items: center;
-  justify-items: center;
-  margin-right: 10px;
-  font-size: 0.5rem;
+	display: none;
+	flex-direction: row;
+	align-items: center;
+	justify-items: center;
+	margin-right: 10px;
+	font-size: 0.5rem;
 }
 
 .header__nav {
@@ -175,7 +179,7 @@ export default {
 
 	::v-deep(.btn-containrt) {
 		height: 80px !important;
-    border-top: 1px solid #e9ecef;
+		border-top: 1px solid #e9ecef;
 	}
 }
 </style>

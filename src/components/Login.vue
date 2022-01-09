@@ -6,24 +6,13 @@
 				<SearchInput class="form-control" @selected="setUserId" />
 			</div>
 			<div class="form-group session__field">
-				<b-form-input
-							  autocomplete="new-password"
-							  placeholder="Mot de passe du Faire-part ou du groupe Facebook"
-							  class="form-control"
-							  required="required"
-							  type="password"
-							  v-model="user.password"></b-form-input>
+				<b-form-input placeholder="Mot de passe du Faire-part ou du groupe Facebook" class="form-control" required="required" type="password" v-model="user.password"></b-form-input>
 			</div>
 			<div class="row no-gutters justify-content-between mt-4">
 				<div class="form-group session__field">
 					<div class="custom-control custom-checkbox">
 						<input name="user[relist_me]" type="hidden" value="0" />
-						<input
-							   class="custom-control-input"
-							   type="checkbox"
-							   value="1"
-							   name="user[relist_me]"
-							   id="user_relist_me" />
+						<input class="custom-control-input" type="checkbox" value="1" name="user[relist_me]" id="user_relist_me" />
 						<label class="custom-control-label" for="user_relist_me">Se souvenir de moi</label>
 					</div>
 				</div>
@@ -31,13 +20,7 @@
 					<a class="session__link" href="mailto:gautier.morel@gmail.com">Mot de passe oublié ?</a>
 				</div>
 			</div>
-			<b-button
-					  type="submit"
-					  name="commit"
-					  value="Se connecter"
-					  class="session__btn"
-					  data-disable-with="Se connecter"
-					  @click="onSubmit">Se connecter</b-button>
+			<b-button type="submit" name="commit" value="Se connecter" class="session__btn" data-disable-with="Se connecter" @click="onSubmit">Se connecter</b-button>
 		</form>
 		<div class="session__switch mb-4">
 			Vous ne vous trouvez pas dans la liste ?

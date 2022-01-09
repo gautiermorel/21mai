@@ -6,15 +6,19 @@
 			</div>
 			<div class="d-flex text-left flex-column align-items-start p-2 w-100">
 				<span>{{guest.username}}</span>
-				<small>Invitation à notre {{invitations[guest.invitation]?.map(t => t.type).join(', ') || guest.inviation}} de mariage</small>
+				<small>Invitation {{invitations[guest.invitation]?.map(t => t.type).join(', ')}} de mariage</small>
 			</div>
 		</div>
-		<div class="d-flex">
-			<div v-if="!guest.websiteAnswer" class="d-flex">
-				<div v-if="invitations[guest.invitation]" class="d-flex flex-column w-100">
-					<SelectButton class="p-selectbutton-warning d-flex flex-row w-100 p-1" v-model="answerKind" :options="invitations[guest.invitation]" optionLabel="type" :multiple="true" />
-					<Button v-if="answerKind && answerKind.length > 0" :label="`PRESENT (${answerKind.map(a => a.type).join(', ')})`" class="p-button-warning m-1" @click="updateAnswer(guest._id, `PRESENT (${answerKind.map(a => a.type).join(', ')})`)" />
-					<Button v-else label="ABSENT" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(guest._id, 'ABSENT')" />
+		<div class="d-flex w-100 justify-content-md-end justify-content-center">
+			<div v-if="!guest.websiteAnswer" class="d-flex w-100 justify-content-md-end">
+				<div v-if="invitations[guest.invitation]?.[1]" class="d-flex flex-column w-100 w-sm-50 align-items-sm-end">
+					<div class="input__switch" v-for="inv in invitations[guest.invitation]" :key="inv">
+						<label class="input__switch--label" :for="inv.code">Je viendrais {{inv.type}}</label>
+						<InputSwitch :id="inv.code" v-model="answerKind[inv.code]" />
+					</div>
+
+					<Button v-if="getAnswers(answerKind)" label="Confirmer" icon="pi pi-check" class="p-button-warning m-1" @click="updateAnswer(guest._id, `PRESENT (${getAnswers(answerKind)})`)" />
+					<Button v-if="!getAnswers(answerKind)" label="Absent" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(guest._id, 'ABSENT')" />
 				</div>
 
 				<div v-else class="d-flex p-3">
@@ -35,14 +39,14 @@
 import moment from 'moment'
 import Avatar from "@/components/Avatar.vue";
 import Button from 'primevue/button';
-import SelectButton from 'primevue/selectbutton';
+import InputSwitch from 'primevue/inputswitch';
 
 export default {
 	name: 'Status',
 	components: {
 		Avatar,
 		Button,
-		SelectButton,
+		InputSwitch,
 	},
 	props: {
 		guest: {}
@@ -62,27 +66,43 @@ export default {
 	},
 	computed: {
 		humanDate: () => value => `Fait le ${moment(value, null, 'fr').format('DD MMMM YYYY à HH:mm')}`,
+		getAnswers: () => answerKind => {
+			if (Object.values(answerKind).filter(value => value).length === 0) return null
+			return Object.entries(answerKind).filter(([_, value]) => value).map(([key]) => key).join(', ')
+		}
 	},
 	data () {
 		return {
 			invitations: {
 				'DINER': [
-					{ type: 'COCKTAIL', code: 'soiree' },
-					{ type: 'DINER', code: 'diner' },
-					{ type: 'SOIREE', code: 'soiree' },
+					{ type: 'au Cocktail', code: 'COCKTAIL' },
+					{ type: 'au Dîner', code: 'DINER' },
+					{ type: 'à la Soirée', code: 'SOIREE' },
 				],
+				'COCKTAIL': [{ type: 'au Cocktail', code: 'COCKTAIL' }],
+				'SOIREE': [{ type: 'à la soirée', code: 'SOIREE' }],
 				'COCKTAIL & SOIREE': [
-					{ type: 'COCKTAIL', code: 'cocktail' },
-					{ type: 'SOIREE', code: 'soiree' },
+					{ type: 'Cocktail', code: 'COCKTAIL' },
+					{ type: 'Soirée', code: 'SOIREE' },
 				],
 			},
-			answerKind: null,
+			answerKind: {},
 		}
 	},
 }
 </script>
 
 <style scoped lang="scss">
+.input__switch {
+	display: flex;
+	flex-direction: row;
+	align-content: end;
+	justify-content: end;
+
+	.input__switch--label {
+		margin-right: 10px;
+	}
+}
 .answer {
 	width: 100%;
 	display: flex;
