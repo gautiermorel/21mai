@@ -68,6 +68,8 @@ export default {
 		humanDate: () => value => `Fait le ${moment(value, null, 'fr').format('DD MMMM YYYY à HH:mm')}`,
 		getAnswers: () => answerKind => {
 			if (Object.values(answerKind).filter(value => value).length === 0) return null
+
+			// eslint-disable-next-line no-unused-vars
 			return Object.entries(answerKind).filter(([_, value]) => value).map(([key]) => key).join(', ')
 		}
 	},
@@ -96,8 +98,8 @@ export default {
 .input__switch {
 	display: flex;
 	flex-direction: row;
-	align-content: end;
-	justify-content: end;
+	align-content: flex-end;
+	justify-content: flex-end;
 
 	.input__switch--label {
 		margin-right: 10px;

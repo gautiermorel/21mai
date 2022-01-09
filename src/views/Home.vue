@@ -21,6 +21,7 @@
 </template>
 
 <script>
+/* eslint-disable vue/no-unused-components */
 import store from '@/store';
 
 import Login from "@/components/Login.vue";
