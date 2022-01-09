@@ -1,12 +1,12 @@
 <template>
 	<div class="container col-md-8 col-lg-5 col-sm-10 px-4 text-center">
 		<Headline anchor="login" title="Découvrez votre espace invité !" />
-		<form class="new_user" id="new_user" accept-charset="UTF-8" :model="user" v-on:submit.prevent="onSubmit" autocomplete="off">
+		<form class="new_user" id="new_user" accept-charset="UTF-8" :model="user" v-on:submit.prevent="onSubmit" autocomplete="one-time-code">
 			<div class="form-group session__field">
-				<SearchInput class="form-control" @selected="setUserId" />
+				<SearchInput autocomplete="one-time-code" class="form-control" @selected="setUserId" />
 			</div>
 			<div class="form-group session__field">
-				<b-form-input placeholder="Mot de passe du Faire-part ou du groupe Facebook" class="form-control" required="required" type="password" v-model="user.password"></b-form-input>
+				<b-form-input autocomplete="one-time-code" placeholder="Mot de passe du Faire-part ou du groupe Facebook" class="form-control" required="required" type="password" v-model="user.password"></b-form-input>
 			</div>
 			<div class="row no-gutters justify-content-between mt-4">
 				<div class="form-group session__field">
