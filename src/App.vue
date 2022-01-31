@@ -10,7 +10,13 @@
         error
       }}</span>
 		</b-alert>
-		<router-view :key="$route.path" />
+
+		<router-view v-slot="{ Component }">
+			<transition name="slide-left">
+				<component :is="Component" />
+			</transition>
+		</router-view>
+
 		<Footer />
 	</div>
 </template>

@@ -12,13 +12,24 @@
 		<div class="d-flex w-100 justify-content-md-end justify-content-center">
 			<div v-if="!guest.websiteAnswer" class="d-flex w-100 justify-content-md-end">
 				<div v-if="invitations[guest.invitation]?.[1]" class="d-flex flex-column w-100 w-sm-50 align-items-sm-end">
-					<div class="input__switch" v-for="inv in invitations[guest.invitation]" :key="inv">
-						<label class="input__switch--label" :for="inv.code">Je viendrais {{inv.type}}</label>
-						<InputSwitch :id="inv.code" v-model="answerKind[inv.code]" />
-					</div>
+					<Button label="Présent" icon="pi pi-check" class="p-button-warning m-1" @click="updateAnswer(guest._id, `PRESENT (${getAnswers(answerKind)})`)" />
+					<Button label="Absent" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(guest._id, 'ABSENT')" />
+					<Button label="Ne peut pas venir à tout" class="p-button-danger m-1 p-button-link" @click="displaySwitch=!displaySwitch" />
 
-					<Button v-if="getAnswers(answerKind)" label="Confirmer" icon="pi pi-check" class="p-button-warning m-1" @click="updateAnswer(guest._id, `PRESENT (${getAnswers(answerKind)})`)" />
-					<Button v-if="!getAnswers(answerKind)" label="Absent" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(guest._id, 'ABSENT')" />
+					<Dialog v-model:visible="displaySwitch">
+						<template #header>
+							Décochez si vous ne pouvez pas venir:
+						</template>
+
+						<div class="input__switch" v-for="inv in invitations[guest.invitation]" :key="inv">
+							<label class="input__switch--label" :for="inv.code">Je viendrais {{inv.type}}</label>
+							<InputSwitch :id="inv.code" v-model="answerKind[inv.code]" />
+						</div>
+
+						<template #footer>
+							<Button label="Confirmer" icon="pi pi-check" class="p-button-warning m-1" @click="updateAnswer(guest._id, `PRESENT (${getAnswers(answerKind)})`)" />
+						</template>
+					</Dialog>
 				</div>
 
 				<div v-else class="d-flex p-3">
@@ -40,6 +51,7 @@ import moment from 'moment'
 import Avatar from "@/components/Avatar.vue";
 import Button from 'primevue/button';
 import InputSwitch from 'primevue/inputswitch';
+import Dialog from 'primevue/dialog';
 
 export default {
 	name: 'Status',
@@ -47,6 +59,7 @@ export default {
 		Avatar,
 		Button,
 		InputSwitch,
+		Dialog,
 	},
 	props: {
 		guest: {}
@@ -75,6 +88,7 @@ export default {
 	},
 	data () {
 		return {
+			displaySwitch: false,
 			invitations: {
 				'DINER': [
 					{ type: 'au Cocktail', code: 'COCKTAIL' },
@@ -88,13 +102,21 @@ export default {
 					{ type: 'Soirée', code: 'SOIREE' },
 				],
 			},
-			answerKind: {},
+			answerKind: {
+        'COCKTAIL': true,
+        'DINER': true,
+        'SOIREE': true,
+      },
 		}
 	},
 }
 </script>
 
 <style scoped lang="scss">
+.p-button {
+	min-width: 200px;
+}
+
 .input__switch {
 	display: flex;
 	flex-direction: row;

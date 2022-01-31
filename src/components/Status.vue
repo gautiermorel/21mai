@@ -20,7 +20,7 @@
 		<br />
 		<br />
 
-		<b-card title="Adresse postale" sub-title="Nous avons besoin de votre adresse pour que nous puissons envoyer notre faire-part :)">
+		<b-card title="Adresse postale">
 			<b-card-text v-if="hasRelations(guest)">Cette adresse sera également mise à jour pour vos proches ci-dessus</b-card-text>
 			<b-card-text v-if="!editing.address && (guest.address || guest.websiteAddress)" class="d-flex flex-column">
 				<div style="white-space: pre;">{{guest.websiteAddress || guest.address}}</div>
@@ -40,7 +40,7 @@
 		<br />
 		<br />
 
-		<b-card title="Laissez nous un commentaire" sub-title="Si vous avez des idées ou suggestions">
+		<b-card title="Laissez nous un commentaire">
 			<b-card-text v-if="!editing.comment && guest.comment" class="d-flex flex-column">
 				<div style="white-space: pre;">{{guest.comment}}</div>
 			</b-card-text>
@@ -70,12 +70,14 @@ import Guest from "@/components/Guest.vue";
 import Button from 'primevue/button';
 import Textarea from 'primevue/textarea';
 import ConfirmDialog from 'primevue/confirmdialog';
+import Dialog from 'primevue/dialog';
 import { useConfirm } from "primevue/useconfirm";
 
 export default {
 	name: 'Status',
 	components: {
 		ConfirmDialog,
+    Dialog,
 		Textarea,
 		Headline,
 		Button,
@@ -136,7 +138,7 @@ export default {
 	},
 	data () {
 		return {
-			inviations: {
+      inviations: {
 				'DINER': [
 					{ type: 'COCKTAIL', code: 'soiree' },
 					{ type: 'DINER', code: 'diner' },

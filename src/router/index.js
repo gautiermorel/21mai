@@ -2,7 +2,11 @@ import { createWebHistory, createRouter } from "vue-router";
 import store from "@/store";
 
 import Home from "@/views/Home.vue";
-// import Guests from '@/views/Guests.vue';
+import Directions from "@/views/Directions.vue";
+import Guests from "@/views/Guests.vue";
+import Playlist from "@/views/Playlist.vue";
+import Pictures from "@/views/Pictures.vue";
+import Seats from "@/views/Seats.vue";
 import NotFound from "@/views/NotFound.vue";
 
 const authGuard = (to, from, next) => {
@@ -17,9 +21,33 @@ const routes = [
     component: Home,
   },
   {
+    path: "/directions",
+    name: "Directions",
+    component: Directions,
+    beforeEnter: authGuard
+  },
+  {
     path: "/guests",
     name: "Guests",
-    component: Home,
+    component: Guests,
+    beforeEnter: authGuard
+  },
+  {
+    path: "/playlist",
+    name: "Playlist",
+    component: Playlist,
+    beforeEnter: authGuard
+  },
+  {
+    path: "/pictures",
+    name: "Pictures",
+    component: Playlist,
+    beforeEnter: authGuard
+  },
+  {
+    path: "/seats",
+    name: "Seats",
+    component: Seats,
     beforeEnter: authGuard
   },
   {

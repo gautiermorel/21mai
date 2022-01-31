@@ -7,20 +7,7 @@
 		<router-link to="#liste" class="header__nav-item">Liste de mariage</router-link>
 	</nav>
 	<nav v-if="isAuthenticated" class="header__nav">
-		<div class="dropdown d-none d-lg-block">
-			<router-link to="/" class="header__nav-item" data-bs-toggle="dropdown">
-				<!-- <Avatar class="profile-picture__img" :username="currentUser.firstName" :inline="true" :size="40" /> -->
-				Accueil
-			</router-link>
-			<div class="navbar__dropdown dropdown-menu dropdown-menu-right">
-				<div class="navbar__dropdown-item navbar__title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
-				<a class="navbar__dropdown-item dropdown-item" rel="nofollow" data-method="delete" href="#" @click="onLogout">
-					<unicon class="navbar__icon navbar__icon--with-text" viewBox="0 0 512 512" name="go-sign-out" />
-					Déconnexion
-				</a>
-			</div>
-		</div>
-
+		<router-link to="/" class="header__nav-item">Accueil</router-link>
 		<router-link to="#info" class="header__nav-item">Info Pratiques</router-link>
 		<router-link to="#logements" class="header__nav-item">Logements</router-link>
 		<router-link to="#transport" class="header__nav-item">Transport</router-link>
@@ -46,9 +33,13 @@
 
 	<VueBottomNavigation class="bottom__navigation" :options="options" v-model="selected" foregroundColor="#FFFFFF" badgeColor="red">
 		<template #icon="{ props }">
-			<unicon class="navbar__icon navbar__icon--with-text" :viewBox="props.viewBox" :name="props.icon" />
+			<router-link v-if="props.route" :to="{ path: props.route }" :key="props.route">
+				<unicon class="navbar__icon navbar__icon--with-text" :viewBox="props.viewBox" :name="props.icon" />
+			</router-link>
 		</template>
-		<template #title="{ props }"> <span class="hello"><b>{{ props.title }}</b></span> </template>
+		<template #title="{ props }">
+			<span class="hide"><b>{{ props.title }}</b></span>
+		</template>
 	</VueBottomNavigation>
 </template>
 
@@ -79,42 +70,54 @@ export default {
 				icon: "go-home",
 				viewBox: '0 0 576 512',
 				title: "Accueil",
-				badge: 0
+				route: '/',
+				badge: 0,
+				isActive: false
 			},
 			{
 				id: 2,
 				icon: "go-cars",
 				viewBox: '0 0 640 512',
 				title: "Co-voiturage",
-				badge: 0
+				route: '/directions',
+				badge: 0,
+				isActive: false
 			},
 			{
 				id: 3,
 				icon: "go-users",
 				viewBox: '0 0 640 512',
 				title: "Invités",
-				badge: 0
+				route: '/guests',
+				badge: 0,
+				isActive: false
 			},
 			{
 				id: 4,
 				icon: "go-music",
 				viewBox: '10 0 512 512',
 				title: "Playlist",
-				badge: 0
+				route: '/playlist',
+				badge: 0,
+				isActive: false
 			},
 			{
 				id: 5,
 				icon: "go-picture",
 				viewBox: '0 0 576 512',
 				title: "Photos",
-				badge: 0
+				route: '/pictures',
+				badge: 0,
+				isActive: false
 			},
 			{
 				id: 6,
 				icon: "go-chair",
 				viewBox: '0 0 448 512',
 				title: "Table",
-				badge: 0
+				route: '/seats',
+				badge: 0,
+				isActive: false
 			}
 		]
 	})
@@ -122,6 +125,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+::v-deep(.checked) {
+	background: red !important;
+}
+
 @font-face {
 	font-family: "Optima";
 	src: local("Optima"), url(/fonts/optima.ttf) format("truetype");
@@ -133,7 +140,7 @@ export default {
 	}
 }
 
-.hello {
+.hide {
 	display: none;
 	flex-direction: row;
 	align-items: center;

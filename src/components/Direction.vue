@@ -15,10 +15,11 @@
 import VuePictureSwipe from "vue3-picture-swipe";
 import Headline from "@/components/Headline.vue";
 
-import tripMap from "@/assets/carte.png";
+import mapSrc from "@/assets/carte_1200x675.png";
+import mapThumbnail from "@/assets/carte_300.png";
 
 export default {
-	name: 'Trip',
+	name: 'Direction',
 	components: {
 		VuePictureSwipe,
 		Headline,
@@ -26,19 +27,13 @@ export default {
 	data () {
 		return {
 			items: [{
-				src: tripMap,
-				thumbnail: tripMap,
-				w: 1777,
-				h: 1000,
+				src: mapSrc,
+				thumbnail: mapThumbnail,
+				w: 1200,
+				h: 675,
 				title: 'Direction à prendre entre l\'église et le château',
 			}]
 		};
 	},
 }
 </script>
-
-<style lang="scss">
-.picture-swipe img {
-	max-width: 100% !important;
-}
-</style>

@@ -3,7 +3,7 @@
 		<div class="dropdown d-none d-lg-block show">
 			<a class="navbar__link nav-link p-0 ml-3 top__header__username" data-bs-toggle="dropdown" href="#" role="button">
 				<div class="top__header__username_use">Bienvenue, {{currentUser.username}}</div>
-        <Avatar class="profile-picture__img" :username="currentUser.firstName" :inline="true" :size="40" />
+				<Avatar class="profile-picture__img" :username="currentUser.firstName" :inline="true" :size="40" />
 			</a>
 			<div class="navbar__dropdown dropdown-menu dropdown-menu-right">
 				<div class="navbar__dropdown-item navbar__title">{{currentUser.firstName}} {{currentUser.lastName}}</div>
@@ -15,12 +15,15 @@
 			</div>
 		</div>
 	</div>
-	<div class="header">
-		<div class="headline">
-			<h1 class="title">Gautier et Ann-Sophie</h1>
-			<span>21 mai 2022</span>
+	<router-link to="/" class="header_router">
+		<div class="header">
+			<div class="headline">
+				<h1 class="title">Gautier et Ann-Sophie</h1>
+				<span>21 mai 2022</span>
+			</div>
 		</div>
-	</div>
+	</router-link>
+
 </template>
 
 <script>
@@ -48,6 +51,10 @@ export default {
 	src: local("Exmouth"), url(/fonts/exmouth.ttf) format("truetype");
 }
 
+.header_router {
+  text-decoration: none;
+}
+
 .top__header {
 	width: 100%;
 	display: flex;
@@ -59,15 +66,15 @@ export default {
 }
 
 .top__header__username {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  // background: yellow;
-  .top__header__username_use {
-    padding-right: 20px;
-    font-size: 15px;
-    font-weight: bold;
-  }
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	// background: yellow;
+	.top__header__username_use {
+		padding-right: 20px;
+		font-size: 15px;
+		font-weight: bold;
+	}
 }
 
 .header {
