@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "@/store";
-import { ElNotification } from 'element-plus';
+// import { ElNotification } from 'element-plus';
 
 export default function fetchApi(secured = true) {
 	if (secured) {
@@ -14,7 +14,7 @@ export default function fetchApi(secured = true) {
 
 		api.interceptors.response.use((response) => response, (error) => {
 			let { data = '', status = 500, statusText = 'Une erreur inattendue s’est produite' } = (error && error.response) || {};
-			ElNotification.error({ title: 'Erreur', message: `${status} - ${statusText} ${typeof data === 'string' ? data : ''}` });
+			// ElNotification.error({ title: 'Erreur', message: `${status} - ${statusText} ${typeof data === 'string' ? data : ''}` });
 			return Promise.reject(status);
 		});
 

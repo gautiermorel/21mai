@@ -83,7 +83,7 @@ export default createStore({
 		},
 		logout: ({ commit }) => {
 			commit("clearToken");
-			router.push("/");
+			router.push("/login");
 		}
 	}
 })

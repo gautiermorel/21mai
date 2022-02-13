@@ -1,15 +1,6 @@
 <template>
 	<div>
-		<Header />
-		<div v-if="isBusy" class="d-flex align-items-center container mb-4 mb-lg-5">
-			<strong>Loading...</strong>
-			<b-spinner class="ms-auto"></b-spinner>
-		</div>
-		<b-alert class="container mb-4 mb-lg-5" :show="!!error" variant="danger">
-			<span class="text-center text-md-right d-flex justify-content-center">{{
-        error
-      }}</span>
-		</b-alert>
+		<ProgressBar v-if="isBusy" mode="indeterminate" />
 
 		<router-view v-slot="{ Component }">
 			<transition name="slide-left">
@@ -25,13 +16,11 @@
 import store from "@/store";
 import { computed } from "vue";
 
-import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
 	name: "App",
 	components: {
-		Header,
 		Footer,
 	},
 	setup () {
@@ -45,3 +34,22 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss">
+@font-face {
+	font-family: "Caudex";
+	src: local("Caudex"), url(/fonts/Caudex.ttf) format("truetype");
+}
+
+* {
+	font-family: "Caudex", "sans-serif";
+}
+
+body {
+  background-color: #fcfcfc;
+}
+
+.p-progressbar-indeterminate {
+	height: 5px !important;
+}
+</style>

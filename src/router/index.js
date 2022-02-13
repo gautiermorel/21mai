@@ -2,52 +2,31 @@ import { createWebHistory, createRouter } from "vue-router";
 import store from "@/store";
 
 import Home from "@/views/Home.vue";
-import Directions from "@/views/Directions.vue";
-import Guests from "@/views/Guests.vue";
-import Playlist from "@/views/Playlist.vue";
-import Pictures from "@/views/Pictures.vue";
-import Seats from "@/views/Seats.vue";
+import Login from "@/views/Login.vue";
+import Logout from "@/views/Logout.vue";
 import NotFound from "@/views/NotFound.vue";
 
 const authGuard = (to, from, next) => {
-  if (store.getters.isAuthenticated) next();
-  else next("/")
+  if (store.getters.isAuthenticated) next()
+  else next('/login')
 };
 
 const routes = [
   {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    component: Logout,
+    beforeEnter:  (to, from, next) => next("/login")
+  },
+  {
     path: "/",
     name: "Home",
     component: Home,
-  },
-  {
-    path: "/directions",
-    name: "Directions",
-    component: Directions,
-    beforeEnter: authGuard
-  },
-  {
-    path: "/guests",
-    name: "Guests",
-    component: Guests,
-    beforeEnter: authGuard
-  },
-  {
-    path: "/playlist",
-    name: "Playlist",
-    component: Playlist,
-    beforeEnter: authGuard
-  },
-  {
-    path: "/pictures",
-    name: "Pictures",
-    component: Playlist,
-    beforeEnter: authGuard
-  },
-  {
-    path: "/seats",
-    name: "Seats",
-    component: Seats,
     beforeEnter: authGuard
   },
   {
