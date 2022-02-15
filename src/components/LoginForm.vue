@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<form ref="form" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');console.log('coucou')" v-on:keyup.enter="onSubmit" class="col-12 xl:col-6" style="border-radius:56px; padding:0.3rem;">
+		<form ref="form" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" v-on:keyup.enter="onSubmit" style="border-radius:56px; padding:0.3rem;">
 			<div class="h-full w-full m-0 py-7 px-4" style="border-radius:53px;">
 				<div class="text-center mb-5">
 					<img :src="logo21mai" alt="Image" height="50" class="mb-3">
