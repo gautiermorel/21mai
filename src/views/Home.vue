@@ -1,88 +1,98 @@
 <template>
-	<div class="flex flex-wrap align-items-center justify-content-center">
-		<Headline />
-	</div>
-	<br />
-	<br />
-	<br />
-	<div class="home flex flex-wrap align-items-center justify-content-center">
+	<div>
+		<div class="flex flex-wrap align-items-center justify-content-center">
+			<Headline />
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="home flex flex-wrap align-items-center justify-content-center">
 
-		<div class="status">
-			<p>Bonjour {{currentUser.username}}, dites nous vite si nous aurons la chance de vous voir à notre mariage !</p>
+			<div class="status">
+				<p>Bonjour {{currentUser.username}}, dites nous vite si nous aurons la chance de vous voir à notre mariage !</p>
 
-			<GuestCard v-if="!hasRelations(guest)" :guest="guest" @update:answer="updateAnswer" />
+				<GuestCard v-if="!hasRelations(guest)" :guest="guest" @update:answer="updateAnswer" />
 
-			<small v-if="hasRelations(guest)">Vous pouvez également répondre pour vos proches:</small>
+				<small v-if="hasRelations(guest)">Vous pouvez également répondre pour vos proches:</small>
 
-			<div v-if="hasRelations(guest)">
-				<div v-for="relation in guest.relations" :key="relation._id">
-					<GuestCard :guest="relation" @update:answer="updateAnswer" />
+				<div v-if="hasRelations(guest)">
+					<div v-for="relation in guest.relations" :key="relation._id">
+						<GuestCard :guest="relation" @update:answer="updateAnswer" />
+					</div>
 				</div>
+
+				<br />
+				<br />
+				<br />
+
+				<Card>
+					<template #title>
+						Adresse postale
+					</template>
+					<template #content>
+						<small v-if="hasRelations(guest)">Cette adresse sera également mise à jour pour vos proches ci-dessus</small>
+						<br />
+						<br />
+						<br />
+						<div v-if="!editing.address && (guest.address || guest.websiteAddress)" class="flex flex-column">
+							<div style="white-space: pre;">{{guest.websiteAddress || guest.address}}</div>
+						</div>
+
+						<div v-if="editing.address || (!guest.address && !guest.websiteAddress)" class="flex flex-column">
+							<Textarea v-model="guest.websiteAddress" :autoResize="false" rows="5" cols="30" @click="editing.address=true" />
+							<div class="flex w-full justify-content-center align-items-center">
+								<Button class="p-button-danger m-1" label="Annuler" @click="editing.address = false" />
+								<Button label="Confirmer" class="m-1" @click="updateAddress(false)" />
+							</div>
+						</div>
+
+					</template>
+					<template #footer>
+						<div class="flex justify-content-end">
+							<Button label="Modifier votre adresse" v-if="!editing.address" @click="isEditing('address', true)" class="card-link p-button-link" />
+						</div>
+					</template>
+				</Card>
+
+				<br />
+				<br />
+				<br />
+
+				<Card>
+					<template #title>
+						Des questions, remarques ou suggestions ?
+					</template>
+					<template #content>
+						<div class="flex flex-column">
+							<small>Dites-nous par exemple si vous avez des allergies ou que vous préférez un plat végétarien.</small>
+							<small>Une musique préférée ?</small>
+							<small>Vous avez ou vous recherhez une place dans une voiture ?</small>
+						</div>
+						<br />
+						<br />
+						<br />
+						<div v-if="!editing.comment && guest.comment" class="flex flex-column">
+							<div style="white-space: pre;">{{guest.comment}}</div>
+						</div>
+
+						<div v-if="editing.comment || !guest.comment" class="flex flex-column">
+							<Textarea v-model="guest.comment" :autoResize="false" rows="5" cols="30" @click="editing.comment=true" />
+							<div class="flex w-full justify-content-center align-content-center align-items-center">
+								<Button class="p-button-danger m-1" label="Annuler" @click="editing.comment = false" />
+								<Button label="Confirmer" class="m-1" @click="updateComment()" />
+							</div>
+						</div>
+					</template>
+					<template #footer>
+						<div class="flex justify-content-end">
+							<Button label="Modifier votre commentaire" v-if="!editing.comment" @click="isEditing('comment', true)" class="card-link p-button-link" />
+						</div>
+					</template>
+				</Card>
 			</div>
 
-			<br />
-			<br />
-			<br />
-
-			<Card>
-				<template #title>
-					Adresse postale
-				</template>
-				<template #content>
-					<small v-if="hasRelations(guest)">Cette adresse sera également mise à jour pour vos proches ci-dessus</small>
-					<br />
-					<br />
-					<br />
-					<div v-if="!editing.address && (guest.address || guest.websiteAddress)" class="flex flex-column">
-						<div style="white-space: pre;">{{guest.websiteAddress || guest.address}}</div>
-					</div>
-
-					<div v-if="editing.address || (!guest.address && !guest.websiteAddress)" class="flex flex-column">
-						<Textarea v-model="guest.websiteAddress" :autoResize="false" rows="5" cols="30" @click="editing.address=true" />
-						<div class="flex w-full justify-content-center align-items-center">
-							<Button class="p-button-danger m-1" label="Annuler" @click="editing.address = false" />
-							<Button label="Confirmer" class="m-1" @click="updateAddress(false)" />
-						</div>
-					</div>
-
-				</template>
-				<template #footer>
-					<div class="flex justify-content-end">
-						<Button label="Modifier votre adresse" v-if="!editing.address" @click="isEditing('address', true)" class="card-link p-button-link" />
-					</div>
-				</template>
-			</Card>
-
-			<br />
-			<br />
-			<br />
-
-			<Card>
-				<template #title>
-					Laissez nous un commentaire
-				</template>
-				<template #content>
-					<div v-if="!editing.comment && guest.comment" class="flex flex-column">
-						<div style="white-space: pre;">{{guest.comment}}</div>
-					</div>
-
-					<div v-if="editing.comment || !guest.comment" class="flex flex-column">
-						<Textarea v-model="guest.comment" :autoResize="false" rows="5" cols="30" @click="editing.comment=true" />
-						<div class="flex w-full justify-content-center align-content-center align-items-center">
-							<Button class="p-button-danger m-1" label="Annuler" @click="editing.comment = false" />
-							<Button label="Confirmer" class="m-1" @click="updateComment()" />
-						</div>
-					</div>
-				</template>
-				<template #footer>
-					<div class="flex justify-content-end">
-						<Button label="Modifier votre commentaire" v-if="!editing.comment" @click="isEditing('comment', true)" class="card-link p-button-link" />
-					</div>
-				</template>
-			</Card>
+			<ConfirmDialog></ConfirmDialog>
 		</div>
-
-		<ConfirmDialog></ConfirmDialog>
 	</div>
 </template>
 
