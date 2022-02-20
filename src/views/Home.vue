@@ -91,6 +91,7 @@
 				</Card>
 			</div>
 
+			<Toast />
 			<ConfirmDialog></ConfirmDialog>
 		</div>
 	</div>
@@ -104,6 +105,7 @@ import moment from 'moment'
 import Headline from "@/components/Headline.vue";
 import GuestCard from "@/components/GuestCard.vue";
 import { useConfirm } from "primevue/useconfirm";
+import { useToast } from "primevue/usetoast";
 
 export default {
 	name: 'Home',
@@ -116,7 +118,8 @@ export default {
 	},
 	setup () {
 		const confirm = useConfirm();
-		return { confirm }
+		const toast = useToast();
+		return { confirm, toast }
 	},
 	methods: {
 		isEditing (field, value) {
@@ -130,7 +133,7 @@ export default {
 				icon: 'pi pi-exclamation-triangle',
 				accept: async () => {
 					await fetchApi().put(`/guests/${guestId}`, { field: 'websiteAnswer', value, saveDate: true })
-					this.$notify({ title: 'Merci', message: "Merci de votre réponse !", type: 'success' });
+					this.toast.add({ severity: 'success', summary: 'Merci', detail: 'Nous avons bien enregistré votre réponse', life: 3000 });
 					this.guest = await this.getGuest(this.currentUser._id);
 				},
 				reject: () => { }
@@ -141,14 +144,14 @@ export default {
 			this.editing.address = false
 			const multi = this.guest.relations.length > 0
 			await fetchApi().put(`/guests/${this.guest._id}`, { field: 'websiteAddress', value: this.guest.websiteAddress, multi })
-			this.$notify({ title: 'Merci', message: "Votre adresse nous a bien été transmise ! Merci !", type: 'success' });
+			this.toast.add({ severity: 'success', summary: 'Merci', detail: 'Votre adresse nous a bien été transmise ! Merci ', life: 3000 });
 			this.guest = await this.getGuest(this.currentUser._id);
 		},
 
 		async updateComment () {
 			this.editing.comment = false
 			await fetchApi().put(`/guests/${this.guest._id}`, { field: 'comment', value: this.guest.comment })
-			this.$notify({ title: 'Merci', message: "Votre commentaire nous a bien été transmise ! Merci !", type: 'success' });
+			this.toast.add({ severity: 'success', summary: 'Merci', detail: 'Votre commentaire nous a bien été transmis ! Merci ', life: 3000 });
 			this.guest = await this.getGuest(this.currentUser._id);
 		},
 

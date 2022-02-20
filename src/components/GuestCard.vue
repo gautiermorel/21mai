@@ -36,8 +36,8 @@
 					</div>
 					<div class="flex flex-column md:align-items-end align-items-center" v-if="guest.websiteAnswer">
 						<span class="answer-text">{{guest.websiteAnswer}}</span>
-						<small>{{humanDate(guest.answerDate)}}</small>
-						<small>Type de réponse: {{guest.answerType || (guest.websiteAnswer ? 'site web' : 'en direct')}}</small>
+						<small>{{humanDate(guest.websiteAnswerDate)}}</small>
+						<small>Type de réponse: {{guest.answerType || 'web'}}</small>
 					</div>
 				</div>
 			</div>
@@ -165,7 +165,7 @@ export default {
 
 	.input__switch--label {
 		margin-right: 10px;
-    cursor: pointer;
+		cursor: pointer;
 	}
 }
 .answer {

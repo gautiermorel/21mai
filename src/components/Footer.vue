@@ -15,7 +15,7 @@
 			<div>Nous sommes entrain de constituer notre liste de mariage :)</div>
 			<div>Si vous preferez nous aider en nous apportant une contribution libre, voilà nos identifiants bancaires:</div>
 
-			<pre style="text-align:center">IVEZEZAKAK</pre>
+			<pre style="text-align:center">BE34001885252590</pre>
 
 			<template #footer>
 				<Button label="D'accord" class="m-1" @click="show = false" />
