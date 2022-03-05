@@ -42,7 +42,7 @@
 							<Textarea v-model="guest.websiteAddress" :autoResize="false" rows="5" cols="30" @click="editing.address=true" />
 							<div class="flex w-full justify-content-center align-items-center">
 								<Button class="p-button-danger m-1" label="Annuler" @click="editing.address = false" />
-								<Button label="Confirmer" class="m-1" @click="updateAddress(false)" />
+								<Button label="Confirmer" class="m-1" @click="updateAddress(false)" :disabled="!guest.websiteAddress" />
 							</div>
 						</div>
 
@@ -66,7 +66,7 @@
 						<div class="flex flex-column">
 							<small>Dites-nous par exemple si vous avez des allergies ou que vous préférez un plat végétarien.</small>
 							<small>Une musique préférée ?</small>
-							<small>Vous avez ou vous recherhez une place dans une voiture ?</small>
+							<small>Vous avez ou vous cherchez une place dans une voiture ?</small>
 						</div>
 						<br />
 						<br />
@@ -79,7 +79,7 @@
 							<Textarea v-model="guest.comment" :autoResize="false" rows="5" cols="30" @click="editing.comment=true" />
 							<div class="flex w-full justify-content-center align-content-center align-items-center">
 								<Button class="p-button-danger m-1" label="Annuler" @click="editing.comment = false" />
-								<Button label="Confirmer" class="m-1" @click="updateComment()" />
+								<Button label="Confirmer" class="m-1" @click="updateComment()" :disabled="!guest.comment" />
 							</div>
 						</div>
 					</template>

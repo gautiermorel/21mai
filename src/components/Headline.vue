@@ -8,7 +8,10 @@
 
 			<ul style="text-align: left">
 				<li>La messe se déroulera à Bruxelles à 15h à l’Église <a class="a_link" href="https://goo.gl/maps/2dcRafy5u243UWc67" target="_blank">Notre-Dame de l'Annonciation - 1050 Ixelles</a></li>
-				<li>La réception (Cocktail, diner, soirée) aura lieu au <a class="a_link" href="https://goo.gl/maps/jHA7va5F5WA3ozYJ6" target="_blank">Château de la Rocq à Seneffe (Rue Omer Lion, 7180 Arquennes)</a> à partir de 18h. </li>
+				<li>
+          La réception (Cocktail, diner, soirée) aura lieu au <a class="a_link" href="https://goo.gl/maps/jHA7va5F5WA3ozYJ6" target="_blank">Château de la Rocq à Seneffe (Rue Omer Lion, 7180 Arquennes)</a> à partir de 18h.
+          <small>Nous ne pouvons malheureusement pas accueillir les enfants 😥</small>
+        </li>
 			</ul>
 
 			<p>Nous avons hâte de tous vous retrouver/rencontrer !</p>

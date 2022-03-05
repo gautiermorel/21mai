@@ -17,6 +17,8 @@
 
 			<pre style="text-align:center">BE34001885252590</pre>
 
+      <div>Merci !! :)</div>
+
 			<template #footer>
 				<Button label="D'accord" class="m-1" @click="show = false" />
 			</template>
