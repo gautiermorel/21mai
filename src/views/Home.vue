@@ -30,22 +30,23 @@
 						Adresse postale
 					</template>
 					<template #content>
-						<small v-if="hasRelations(guest)">Cette adresse sera également mise à jour pour vos proches ci-dessus</small>
-						<br />
-						<br />
-						<br />
-						<div v-if="!editing.address && (guest.address || guest.websiteAddress)" class="flex flex-column">
-							<div style="white-space: pre;">{{guest.websiteAddress || guest.address}}</div>
-						</div>
+						<div class="flex flex-column align-items-center">
+							<small v-if="hasRelations(guest)">Cette adresse sera également mise à jour pour vos proches ci-dessus</small>
+							<br />
+							<br />
+							<br />
+							<div v-if="!editing.address && (guest.address || guest.websiteAddress)" class="flex flex-column" style="max-width:400px;">
+								<div style="white-space: break-line;">{{guest.websiteAddress || guest.address}}</div>
+							</div>
 
-						<div v-if="editing.address || (!guest.address && !guest.websiteAddress)" class="flex flex-column">
-							<Textarea v-model="guest.websiteAddress" :autoResize="false" rows="5" cols="30" @click="editing.address=true" />
-							<div class="flex w-full justify-content-center align-items-center">
-								<Button class="p-button-danger m-1" label="Annuler" @click="editing.address = false" />
-								<Button label="Confirmer" class="m-1" @click="updateAddress(false)" :disabled="!guest.websiteAddress" />
+							<div v-if="editing.address || (!guest.address && !guest.websiteAddress)" class="flex flex-column" style="max-width:400px;">
+								<Textarea v-model="guest.websiteAddress" :autoResize="false" rows="5" cols="30" @click="editing.address=true" />
+								<div class="flex w-full justify-content-center align-items-center">
+									<Button class="p-button-danger m-1" label="Annuler" @click="editing.address = false" />
+									<Button label="Confirmer" class="m-1" @click="updateAddress(false)" :disabled="!guest.websiteAddress" />
+								</div>
 							</div>
 						</div>
-
 					</template>
 					<template #footer>
 						<div class="flex justify-content-end">
@@ -63,23 +64,25 @@
 						Des questions, remarques ou suggestions ?
 					</template>
 					<template #content>
-						<div class="flex flex-column">
-							<small>Dites-nous par exemple si vous avez des allergies ou que vous préférez un plat végétarien.</small>
-							<small>Une musique préférée ?</small>
-							<small>Vous avez ou vous cherchez une place dans une voiture ?</small>
-						</div>
-						<br />
-						<br />
-						<br />
-						<div v-if="!editing.comment && guest.comment" class="flex flex-column">
-							<div style="white-space: pre;">{{guest.comment}}</div>
-						</div>
+						<div class="flex flex-column align-items-center">
+							<div class="flex flex-column">
+								<small>Dites-nous par exemple si vous avez des allergies ou que vous préférez un plat végétarien.</small>
+								<small>Une musique préférée ?</small>
+								<small>Vous avez ou vous cherchez une place dans une voiture ?</small>
+							</div>
+							<br />
+							<br />
+							<br />
+							<div v-if="!editing.comment && guest.comment" class="flex flex-column" style="max-width:400px;">
+								<div style="white-space: break-line">{{guest.comment}}</div>
+							</div>
 
-						<div v-if="editing.comment || !guest.comment" class="flex flex-column">
-							<Textarea v-model="guest.comment" :autoResize="false" rows="5" cols="30" @click="editing.comment=true" />
-							<div class="flex w-full justify-content-center align-content-center align-items-center">
-								<Button class="p-button-danger m-1" label="Annuler" @click="editing.comment = false" />
-								<Button label="Confirmer" class="m-1" @click="updateComment()" :disabled="!guest.comment" />
+							<div v-if="editing.comment || !guest.comment" class="flex flex-column">
+								<Textarea v-model="guest.comment" :autoResize="false" rows="5" cols="30" @click="editing.comment=true" />
+								<div class="flex w-full justify-content-center align-content-center align-items-center">
+									<Button class="p-button-danger m-1" label="Annuler" @click="editing.comment = false" />
+									<Button label="Confirmer" class="m-1" @click="updateComment()" :disabled="!guest.comment" />
+								</div>
 							</div>
 						</div>
 					</template>

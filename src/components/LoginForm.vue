@@ -12,7 +12,7 @@
 				</div>
 
 				<div class="w-full md:w-10 mx-auto">
-					<label for="email1" class="block text-900 text-sm font-medium mb-2">Email</label>
+					<label for="email1" class="block text-900 text-sm font-medium mb-2">Tapez au moins 3 lettres de votre nom ou prénom</label>
 
 					<div class="grid formgrid w-full">
 						<div class="w-full col-12 mb-2 lg:col-4 lg:mb-0">
@@ -25,7 +25,7 @@
 
 					</div>
 
-					<label for="password1" class="block text-900 font-medium text-sm mb-2 mt-2">Mot de passe</label>
+					<label for="password1" class="block text-900 font-medium text-sm mb-2 mt-2">Mot de passe sur le carton d'invitation</label>
 					<InputText ref="inputPassword" placeholder="Mot de passe" autocomplete="off" id="password" type="password" v-model="password" class="w-full mb-3" inputClass="w-full" inputStyle="padding:1rem" />
 
 					<div class="flex align-items-center justify-content-between mb-5">
