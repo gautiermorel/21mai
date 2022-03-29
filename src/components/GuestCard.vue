@@ -14,7 +14,7 @@
 				<div class="flex md:w-6 w-full text-align-end justify-content-end">
 					<div v-if="!guest.websiteAnswer" class="flex w-full justify-content-md-end">
 						<div class="flex flex-column w-full align-items-end">
-							<Button label="Présent" icon="pi pi-check" class="m-1" @click="updateAnswer(guest._id, 'PRESENT (COCKTAIL)')" />
+							<Button label="Présent" icon="pi pi-check" class="m-1" @click="updateAnswer(guest._id, 'PRESENT')" />
 							<Button label="Absent" icon="pi pi-times" class="p-button-danger m-1" @click="updateAnswer(guest._id, 'ABSENT')" />
 							<Button v-if="invitations[guest.invitation]?.[1]" label="Ne peut pas venir à tout" class="p-button-danger m-1 p-button-link" @click="displaySwitch=!displaySwitch" />
 
