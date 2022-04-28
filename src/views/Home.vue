@@ -1,9 +1,7 @@
 <template>
 	<div class="p-3 message-list">
-		<Message severity="warn" icon="info">
-			<p>Nous avons eu beaucoup de demandes concernant notre liste de mariage: Même si notre plus beau cadeau sera de vous avoir près de nous le jour J, notre liste de mariage est enfin disponible ici: <a target="_blank" href="https://www.millemercismariage.com/21mai2022/liste.html">millemercismariage</a></p>
-			<p>Si vous preferez nous participer de façon libre, c'est aussi possible par virement sur notre compte commun: <b>BE34001885252590</b> <small>(N'oubliez pas de nous dire qui vous êtes pour que nous puissions vous remercier 😀 )</small></p>
-			<p>Merci ! 😍 Gautier & AnnSo</p>
+		<Message severity="success" icon="info">
+			<p>Notre liste de mariage enfin disponible ici: <a target="_blank" href="https://www.millemercismariage.com/21mai2022/liste.html">millemercismariage</a> - Merci ! 😍 Gautier & AnnSo</p>
 		</Message>
 	</div>
 	<div>
@@ -230,11 +228,6 @@ export default {
 	text-align: center;
 }
 .message-list {
-	p {
-		font-size: 0.8rem;
-	}
-	a {
-		font-size: 1rem;
-	}
+	font-size: 1rem;
 }
 </style>
