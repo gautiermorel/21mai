@@ -155,7 +155,7 @@ app.use(PrimeVue, primeOptions)
 app.use(ConfirmationService)
 app.use(DisableAutocomplete)
 app.use(ToastService)
-app.use(Tooltip)
+app.directive('tooltip', Tooltip)
 
 app.use(Unicon, { fill: 'black', height: 22, width: 22 })
 

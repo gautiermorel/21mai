@@ -1,34 +1,39 @@
 import { createWebHistory, createRouter } from "vue-router";
 import store from "@/store";
 
+// import Admin from "@/views/Admin.vue";
 import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
-import Logout from "@/views/Logout.vue";
+// import Logout from "@/views/Logout.vue";
 import NotFound from "@/views/NotFound.vue";
 
-const authGuard = (to, from, next) => {
-  if (store.getters.isAuthenticated) next()
-  else next('/login')
-};
+// const authGuard = (to, from, next) => {
+//   if (store.getters.isAuthenticated) next()
+//   else next('/login')
+// };
 
 const routes = [
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-  },
-  {
-    path: "/logout",
-    name: "Logout",
-    component: Logout,
-    beforeEnter:  (to, from, next) => next("/login")
-  },
   {
     path: "/",
     name: "Home",
     component: Home,
-    beforeEnter: authGuard
   },
+  {
+    path: "/login",
+    name: "Login",
+    beforeEnter:  (to, from, next) => next("/")
+  },
+  // {
+  //   path: "/logout",
+  //   name: "Logout",
+  //   component: Logout,
+  //   beforeEnter:  (to, from, next) => next("/")
+  // },
+  // {
+  //   path: "/admin",
+  //   name: "Admin",
+  //   component: Admin,
+  //   beforeEnter: authGuard
+  // },
   {
     path: "/:catchAll(.*)",
     component: NotFound,

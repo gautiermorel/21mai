@@ -1,233 +1,148 @@
 <template>
-	<div class="p-3 message-list">
-		<Message severity="success" icon="info">
-			<p>Notre liste de mariage enfin disponible ici: <a target="_blank" href="https://www.millemercismariage.com/21mai2022/liste.html">millemercismariage</a> (<span style="font-size:0.8rem;">Participation libre: BE34001885252590)</span> - Merci ! 😍 Gautier & AnnSo</p>
-    </Message>
+	<div class="wedding-list">
+		<a href="https://www.millemercismariage.com/21mai2022/liste.html" target="_blank">Vers la liste de mariage <span class="highlight">♡</span></a>
 	</div>
-	<div>
-		<div class="flex flex-wrap align-items-center justify-content-center">
-			<Headline />
-		</div>
-		<br />
-		<br />
-		<br />
-		<div class="home flex flex-wrap align-items-center justify-content-center">
 
-			<div class="status">
-				<p>Bonjour {{currentUser.username}}, dites nous vite si nous aurons la chance de vous voir à notre mariage !</p>
+	<div class="flex flex-wrap align-items-center justify-content-center">
+		<Headline />
+		<div class="content">
+			<section>
+				<div class="title">Programme du jour <span class="highlight">J</span></div>
+				<div class="message">
+					<ul class="bullet-list">
+						<li>La messe se déroulera à Bruxelles à 15h à l’Église <a class="a_link" href="https://goo.gl/maps/2dcRafy5u243UWc67" target="_blank">Notre-Dame de l'Annonciation - 1050 Ixelles</a></li>
 
-				<GuestCard v-if="!hasRelations(guest)" :guest="guest" @update:answer="updateAnswer" />
+						<p>À partir de 18h, rendez-vous au <a class="a_link" href="https://goo.gl/maps/jHA7va5F5WA3ozYJ6" target="_blank">Château de la Rocq à Seneffe (Rue Omer Lion, 7180 Arquennes)</a> </p>
 
-				<small v-if="hasRelations(guest)">Vous pouvez également répondre pour vos proches:</small>
-
-				<div v-if="hasRelations(guest)">
-					<div v-for="relation in guest.relations" :key="relation._id">
-						<GuestCard :guest="relation" @update:answer="updateAnswer" />
-					</div>
+						<li>Cocktail de 18 à 20h.</li>
+						<li>Diner placé et soirée de 20h à 4h du matin.</li>
+					</ul>
 				</div>
+			</section>
+			<section>
+				<div class="title">Parkings <span class="highlight">&</span> Voitures</div>
+				<div class="message">
+					<p>Attention, si vous êtes <span class="hightlight">FRANÇAIS 🇫🇷</span> sachez que la réglementation Bruxelloise à recemment mis en place une zone "LEZ".</p>
+					<p>Vous devez normalement enregistrer votre véhicule en vous rendant sur ce site: <a href="https://lez.brussels/mytax/fr/" target="_blank">Low Emission Zone</a></p>
+					<p>Il va probablement y avoir pas mal de voitures, et nous n'avons pas pu réserver d'emplacements. Prenez un petit moment pour explorer vos options:</p>
+					<ul class="bullet-list">
+						<li><a href="https://seety.co/fr/reglements-parking/bruxelles" target="_blank">Réglementations et tarifs de parking à Bruxelles</a></li>
+						<li><a href="https://map.seety.co/Place%20Georges%20Brugmann,%201050%20Bruxelles/14.98?lang=fr">Plan de stationnement autour de l'église</a></li>
+					</ul>
 
-				<br />
-				<br />
-				<br />
+				</div>
+			</section>
+			<section>
+				<div class="title">Les chants <span class="highlight">🎶</span> de notre messe</div>
+				<div class="message">
+					<p>Aidez oncle Bernard, échauffez vos voix et révisez vos classiques !</p>
+					<ul class="bullet-list">
+						<li>Lien vers <a class="a_link" href="https://open.spotify.com/playlist/1Yc2NlKgWj8f70jw94IcfL?si=cabf4c8b07ae44e7&pt=abe13ca92cb60298dba3df44e7ae522c" target="_blank">la playlist Spotify</a></li>
+						<li>Lien vers <a class="a_link" href="https://www.youtube.com/playlist?list=PLtIOUeSB-xClxuDG3SbJ_6fDJ7NKsDdMn" target="_blank">le mix Youtube</a></li>
+					</ul>
+				</div>
+			</section>
 
-				<Card>
-					<template #title>
-						Adresse postale
-					</template>
-					<template #content>
-						<div class="flex flex-column align-items-center">
-							<small v-if="hasRelations(guest)">Cette adresse sera également mise à jour pour vos proches ci-dessus</small>
-							<br />
-							<br />
-							<br />
-							<div v-if="!editing.address && (guest.address || guest.websiteAddress)" class="flex flex-column" style="max-width:400px;">
-								<div style="white-space: break-line;">{{guest.websiteAddress || guest.address}}</div>
-							</div>
+			<section>
+				<div class="title">Liste de mariage <span class="highlight">♡</span></div>
+				<div class="message">
+					<p>Notre liste de mariage est disponible ici: <a target="_blank" href="https://www.millemercismariage.com/21mai2022/liste.html">millemercismariage</a> (<span style="font-size:0.8rem;">Participation libre: BE34001885252590)</span> - Merci ! 😍 Gautier & AnnSo</p>
+				</div>
+			</section>
 
-							<div v-if="editing.address || (!guest.address && !guest.websiteAddress)" class="flex flex-column" style="max-width:400px;">
-								<Textarea v-model="guest.websiteAddress" :autoResize="false" rows="5" cols="30" @click="editing.address=true" />
-								<div class="flex w-full justify-content-center align-items-center">
-									<Button class="p-button-danger m-1" label="Annuler" @click="editing.address = false" />
-									<Button label="Confirmer" class="m-1" @click="updateAddress(false)" :disabled="!guest.websiteAddress" />
-								</div>
-							</div>
-						</div>
-					</template>
-					<template #footer>
-						<div class="flex justify-content-end">
-							<Button label="Modifier votre adresse" v-if="!editing.address" @click="isEditing('address', true)" class="card-link p-button-link" />
-						</div>
-					</template>
-				</Card>
+			<section>
+				<div class="title">Liste des invités <span class="highlight">☆</span></div>
+				<p>Vérifiez que vous êtes bien dedans !</p>
+        <small>Si jamais vous ne vous trouvez pas dans la liste, que vous aviez réservé une chambre au château de la Rocq et qu'il n'est pas marqué "OUI", alors contactez nous de toute urgence ! (c'est peut être simplement un bug d'affichage, mais il vaut mieux être sûr)</small>
+				<Guests />
+			</section>
 
-				<br />
-				<br />
-				<br />
-
-				<Card>
-					<template #title>
-						Des questions, remarques ou suggestions ?
-					</template>
-					<template #content>
-						<div class="flex flex-column align-items-center">
-							<div class="flex flex-column">
-								<small>Dites-nous par exemple si vous avez des allergies ou que vous préférez un plat végétarien.</small>
-								<small>Une musique préférée ?</small>
-								<small>Vous avez ou vous cherchez une place dans une voiture ?</small>
-							</div>
-							<br />
-							<br />
-							<br />
-							<div v-if="!editing.comment && guest.comment" class="flex flex-column" style="max-width:400px;">
-								<div style="white-space: break-line">{{guest.comment}}</div>
-							</div>
-
-							<div v-if="editing.comment || !guest.comment" class="flex flex-column">
-								<Textarea v-model="guest.comment" :autoResize="false" rows="5" cols="30" @click="editing.comment=true" />
-								<div class="flex w-full justify-content-center align-content-center align-items-center">
-									<Button class="p-button-danger m-1" label="Annuler" @click="editing.comment = false" />
-									<Button label="Confirmer" class="m-1" @click="updateComment()" :disabled="!guest.comment" />
-								</div>
-							</div>
-						</div>
-					</template>
-					<template #footer>
-						<div class="flex justify-content-end">
-							<Button label="Modifier votre commentaire" v-if="!editing.comment" @click="isEditing('comment', true)" class="card-link p-button-link" />
-						</div>
-					</template>
-				</Card>
-			</div>
-
-			<Toast />
-			<ConfirmDialog></ConfirmDialog>
+			<section>
+				<div class="title"></div>
+				<div class="message">
+					<p>Nous avons hâte de tous vous retrouver/rencontrer !</p>
+					<p>Gautier & AnnSo</p>
+				</div>
+			</section>
 		</div>
+
 	</div>
 </template>
 
 <script>
 import store from '@/store';
-import fetchApi from "@/services/http";
 
-import moment from 'moment'
 import Headline from "@/components/Headline.vue";
-import GuestCard from "@/components/GuestCard.vue";
-import { useConfirm } from "primevue/useconfirm";
-import { useToast } from "primevue/usetoast";
+import Guests from "@/components/Guests.vue";
 
 export default {
-	name: 'Home',
+	name: "Login",
 	components: {
 		Headline,
-		GuestCard,
-	},
-	created () {
-		this.moment = moment;
-	},
-	setup () {
-		const confirm = useConfirm();
-		const toast = useToast();
-		return { confirm, toast }
-	},
-	methods: {
-		isEditing (field, value) {
-			this.editing[field] = value
-		},
-
-		async updateAnswer ({ guestId, value }) {
-			this.confirm.require({
-				message: 'Afin d\'être pleinnement capable de nous organiser, nous attendons de vous une réponse définitive !',
-				header: 'Etes vous sûr ?',
-				icon: 'pi pi-exclamation-triangle',
-				accept: async () => {
-					await fetchApi().put(`/guests/${guestId}`, { field: 'websiteAnswer', value, saveDate: true })
-					this.toast.add({ severity: 'success', summary: 'Merci', detail: 'Nous avons bien enregistré votre réponse', life: 3000 });
-					this.guest = await this.getGuest(this.currentUser._id);
-				},
-				reject: () => { }
-			});
-		},
-
-		async updateAddress () {
-			this.editing.address = false
-			const multi = this.guest.relations.length > 0
-			await fetchApi().put(`/guests/${this.guest._id}`, { field: 'websiteAddress', value: this.guest.websiteAddress, multi })
-			this.toast.add({ severity: 'success', summary: 'Merci', detail: 'Votre adresse nous a bien été transmise ! Merci ', life: 3000 });
-			this.guest = await this.getGuest(this.currentUser._id);
-		},
-
-		async updateComment () {
-			this.editing.comment = false
-			await fetchApi().put(`/guests/${this.guest._id}`, { field: 'comment', value: this.guest.comment })
-			this.toast.add({ severity: 'success', summary: 'Merci', detail: 'Votre commentaire nous a bien été transmis ! Merci ', life: 3000 });
-			this.guest = await this.getGuest(this.currentUser._id);
-		},
-
-		async getGuest (guestId) {
-			let { data: guest = {} } = await fetchApi().get(`/guests/${guestId}`)
-
-			return guest;
-		},
+		Guests,
 	},
 	computed: {
 		isAuthenticated: () => store.getters.isAuthenticated,
-		currentUser: () => store.getters.getUser,
-		humanDate: () => value => `Fait le ${moment(value, null, 'fr').format('DD MMMM YYYY à HH:mm')}`,
-		hasRelations: () => guest => guest.relations?.length > 0,
-	},
-	data () {
-		return {
-			inviations: {
-				'DINER': [
-					{ type: 'COCKTAIL', code: 'soiree' },
-					{ type: 'DINER', code: 'diner' },
-					{ type: 'SOIREE', code: 'soiree' },
-				],
-				'COCKTAIL & SOIREE': [
-					{ type: 'COCKTAIL', code: 'cocktail' },
-					{ type: 'SOIREE', code: 'soiree' },
-				],
-			},
-			guest: {},
-			editing: {
-				address: false,
-				comment: false,
-			}
-		}
-	},
-	async mounted () {
-		this.guest = await this.getGuest(this.currentUser._id)
 	}
-}
+};
 </script>
 
 <style scoped lang="scss">
-.answer {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-
-	.answer-buttons {
-		width: 50%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-content: center;
-		align-items: center;
-		justify-items: center;
-	}
-}
-.status-address {
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	justify-content: center;
-}
-
-.p-inputtextarea {
-	text-align: center;
-}
 .message-list {
 	font-size: 1rem;
+}
+
+.highlight {
+	color: #ffd54f;
+}
+
+.title {
+	position: relative;
+	display: inline-block;
+	font-size: 1.5rem;
+
+	&::after {
+		content: "";
+		position: absolute;
+		height: 12px;
+		width: 100%;
+		background-color: #feffeb;
+		top: 1.5rem;
+		left: 0;
+		z-index: -1;
+	}
+}
+.message {
+	font-size: 1rem;
+	line-height: 2em;
+}
+
+.content {
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+.bullet-list {
+	text-align: left;
+}
+
+.guest-table {
+	max-width: 100%;
+	overflow-x: scroll;
+}
+
+.guest-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.wedding-list {
+	a {
+		text-decoration: none;
+	}
+	position: absolute;
+	top: 10px;
+	right: 25px;
 }
 </style>
