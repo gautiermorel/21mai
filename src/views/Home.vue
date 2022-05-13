@@ -1,8 +1,8 @@
 <template>
 	<div class="p-3 message-list">
 		<Message severity="success" icon="info">
-			<p>Notre liste de mariage enfin disponible ici: <a target="_blank" href="https://www.millemercismariage.com/21mai2022/liste.html">millemercismariage</a> - Merci ! 😍 Gautier & AnnSo</p>
-		</Message>
+			<p>Notre liste de mariage enfin disponible ici: <a target="_blank" href="https://www.millemercismariage.com/21mai2022/liste.html">millemercismariage</a> (<span style="font-size:0.8rem;">Participation libre: BE34001885252590)</span> - Merci ! 😍 Gautier & AnnSo</p>
+    </Message>
 	</div>
 	<div>
 		<div class="flex flex-wrap align-items-center justify-content-center">
