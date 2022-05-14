@@ -1,14 +1,18 @@
 <template>
 	<div>
-		<ProgressBar v-if="isBusy" mode="indeterminate" />
+		<div class="flex flex-column align-items-center">
+			<div class="wedding-list">
+				<a href="https://www.millemercismariage.com/21mai2022/liste.html" target="_blank">Vers la liste de mariage <span class="highlight">♡</span></a>
+			</div>
 
-		<router-view v-slot="{ Component }">
-			<transition name="slide-left">
+			<Header />
+
+			<router-view v-slot="{ Component }">
 				<component :is="Component" />
-			</transition>
-		</router-view>
+			</router-view>
 
-		<Footer />
+			<Footer />
+		</div>
 	</div>
 </template>
 
@@ -16,11 +20,13 @@
 import store from "@/store";
 import { computed } from "vue";
 
+import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
 	name: "App",
 	components: {
+		Header,
 		Footer,
 	},
 	setup () {
@@ -45,11 +51,21 @@ export default {
 	font-family: "Caudex", "sans-serif";
 }
 
-body {
-  background-color: #fcfcfc;
+html {
+	margin: 0;
+	padding: 0;
 }
 
-.p-progressbar-indeterminate {
-	height: 5px !important;
+body {
+	background-color: #fcfcfc;
+}
+
+.wedding-list {
+	a {
+		text-decoration: none;
+	}
+	position: absolute;
+	top: 10px;
+	right: 25px;
 }
 </style>

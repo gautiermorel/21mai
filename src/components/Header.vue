@@ -1,5 +1,5 @@
 <template>
-	<div class="headline">
+	<div class="header px-3">
 		<div class="label">Mariage</div>
 		<div class="names">Gautier & Ann-Sophie</div>
 		<p>Soyez les bienvenus sur notre site de mariage !</p>
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-	name: 'Headline',
+	name: 'Header',
 }
 </script>
 
@@ -17,10 +17,11 @@ export default {
 	color: black;
 	font-weight: bold;
 }
-.headline {
+.header {
 	margin-top: 100px;
 	position: relative;
 	text-align: center;
+  width: 100%;
 	max-width: 600px;
 	min-height: 8rem;
 

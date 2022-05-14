@@ -1,101 +1,87 @@
 <template>
-	<div class="wedding-list">
-		<a href="https://www.millemercismariage.com/21mai2022/liste.html" target="_blank">Vers la liste de mariage <span class="highlight">♡</span></a>
-	</div>
+	<div class="px-3 md:px-8">
+		<!-- Schedule & Maps -->
+		<section class="my-8 md:my-6">
+			<div class="title">Programme du jour <span class="highlight">J</span></div>
+			<div class="message">
+				<ul class="bullet-list">
+					<li>La messe se déroulera à Bruxelles à 15h à l’Église <a class="a_link" href="https://goo.gl/maps/2dcRafy5u243UWc67" target="_blank">Notre-Dame de l'Annonciation - 1050 Ixelles</a></li>
 
-	<div class="flex flex-wrap align-items-center justify-content-center">
-		<Headline />
-		<div class="content">
-			<section>
-				<div class="title">Programme du jour <span class="highlight">J</span></div>
-				<div class="message">
-					<ul class="bullet-list">
-						<li>La messe se déroulera à Bruxelles à 15h à l’Église <a class="a_link" href="https://goo.gl/maps/2dcRafy5u243UWc67" target="_blank">Notre-Dame de l'Annonciation - 1050 Ixelles</a></li>
+					<p>À partir de 18h, rendez-vous au <a class="a_link" href="https://goo.gl/maps/jHA7va5F5WA3ozYJ6" target="_blank">Château de la Rocq à Seneffe (Rue Omer Lion, 7180 Arquennes)</a> </p>
 
-						<p>À partir de 18h, rendez-vous au <a class="a_link" href="https://goo.gl/maps/jHA7va5F5WA3ozYJ6" target="_blank">Château de la Rocq à Seneffe (Rue Omer Lion, 7180 Arquennes)</a> </p>
+					<li>Cocktail de 18 à 20h.</li>
+					<li>Diner placé et soirée de 20h à 4h du matin.</li>
+				</ul>
+			</div>
+		</section>
 
-						<li>Cocktail de 18 à 20h.</li>
-						<li>Diner placé et soirée de 20h à 4h du matin.</li>
-					</ul>
-				</div>
-			</section>
-			<section>
-				<div class="title">Parkings <span class="highlight">&</span> Voitures</div>
-				<div class="message">
-					<p>Attention, si vous êtes <span class="hightlight">FRANÇAIS 🇫🇷</span> sachez que la réglementation Bruxelloise à recemment mis en place une zone "LEZ".</p>
-					<p>Vous devez normalement enregistrer votre véhicule en vous rendant sur ce site: <a href="https://lez.brussels/mytax/fr/" target="_blank">Low Emission Zone</a></p>
-					<p>Il va probablement y avoir pas mal de voitures, et nous n'avons pas pu réserver d'emplacements. Prenez un petit moment pour explorer vos options:</p>
-					<ul class="bullet-list">
-						<li><a href="https://seety.co/fr/reglements-parking/bruxelles" target="_blank">Réglementations et tarifs de parking à Bruxelles</a></li>
-						<li><a href="https://map.seety.co/Place%20Georges%20Brugmann,%201050%20Bruxelles/14.98?lang=fr">Plan de stationnement autour de l'église</a></li>
-					</ul>
+		<!-- Parkings -->
+		<section class="my-8 md:my-6">
+			<div class="title">Parkings <span class="highlight">&</span> Voitures</div>
+			<div class="message">
+				<p>Attention, si vous êtes <span class="hightlight">FRANÇAIS 🇫🇷</span> sachez que la réglementation Bruxelloise à recemment mis en place une zone "LEZ".</p>
+				<p>Vous devez normalement enregistrer votre véhicule en vous rendant sur ce site: <a href="https://lez.brussels/mytax/fr/" target="_blank">Low Emission Zone</a></p>
+				<p>Il va probablement y avoir pas mal de voitures, et nous n'avons pas pu réserver d'emplacements. Prenez un petit moment pour explorer vos options:</p>
+				<ul class="bullet-list">
+					<li><a href="https://seety.co/fr/reglements-parking/bruxelles" target="_blank">Réglementations et tarifs de parking à Bruxelles</a></li>
+					<li><a href="https://map.seety.co/Place%20Georges%20Brugmann,%201050%20Bruxelles/14.98?lang=fr">Plan de stationnement autour de l'église</a></li>
+				</ul>
 
-				</div>
-			</section>
-			<section>
-				<div class="title">Les chants <span class="highlight">🎶</span> de notre messe</div>
-				<div class="message">
-					<p>Aidez oncle Bernard, échauffez vos voix et révisez vos classiques !</p>
-					<ul class="bullet-list">
-						<li>Lien vers <a class="a_link" href="https://open.spotify.com/playlist/1Yc2NlKgWj8f70jw94IcfL?si=cabf4c8b07ae44e7&pt=abe13ca92cb60298dba3df44e7ae522c" target="_blank">la playlist Spotify</a></li>
-						<li>Lien vers <a class="a_link" href="https://www.youtube.com/playlist?list=PLtIOUeSB-xClxuDG3SbJ_6fDJ7NKsDdMn" target="_blank">le mix Youtube</a></li>
-					</ul>
-				</div>
-			</section>
+			</div>
+		</section>
 
-			<section>
-				<div class="title">Liste de mariage <span class="highlight">♡</span></div>
-				<div class="message">
-					<p>Notre liste de mariage est disponible ici: <a target="_blank" href="https://www.millemercismariage.com/21mai2022/liste.html">millemercismariage</a> (<span style="font-size:0.8rem;">Participation libre: BE34001885252590)</span> - Merci ! 😍 Gautier & AnnSo</p>
-				</div>
-			</section>
+		<!-- Church songs -->
+		<section class="my-8 md:my-6">
+			<div class="title">Les chants <span class="highlight">🎶</span> de notre messe</div>
+			<div class="message">
+				<p>Aidez oncle Bernard, échauffez vos voix et révisez vos classiques !</p>
+				<ul class="bullet-list">
+					<li>Lien vers <a class="a_link" href="https://open.spotify.com/playlist/1Yc2NlKgWj8f70jw94IcfL?si=cabf4c8b07ae44e7&pt=abe13ca92cb60298dba3df44e7ae522c" target="_blank">la playlist Spotify</a></li>
+					<li>Lien vers <a class="a_link" href="https://www.youtube.com/playlist?list=PLtIOUeSB-xClxuDG3SbJ_6fDJ7NKsDdMn" target="_blank">le mix Youtube</a></li>
+				</ul>
+			</div>
+		</section>
 
-			<section>
-				<div class="title">Liste des invités <span class="highlight">☆</span></div>
-				<p>Vérifiez que vous êtes bien dedans !</p>
-        <small>Si jamais vous ne vous trouvez pas dans la liste, que vous aviez réservé une chambre au château de la Rocq et qu'il n'est pas marqué "OUI", alors contactez nous de toute urgence ! (c'est peut être simplement un bug d'affichage, mais il vaut mieux être sûr)</small>
-				<Guests />
-			</section>
+		<!-- Gift list -->
+		<section class="my-8 md:my-6">
+			<div class="title">Liste de mariage <span class="highlight">♡</span></div>
+			<div class="message">
+				<p>Notre liste de mariage est disponible ici: <a target="_blank" href="https://www.millemercismariage.com/21mai2022/liste.html">millemercismariage</a> (<span style="font-size:0.8rem;">Participation libre: BE34001885252590)</span> - Merci ! 😍 Gautier & AnnSo</p>
+			</div>
+		</section>
 
-			<section>
-				<div class="title"></div>
-				<div class="message">
-					<p>Nous avons hâte de tous vous retrouver/rencontrer !</p>
-					<p>Gautier & AnnSo</p>
-				</div>
-			</section>
-		</div>
+		<!-- Guest -->
+		<section class="my-8 md:my-6">
+			<div class="title">Liste des invités <span class="highlight">☆</span></div>
+			<p>Vérifiez que vous êtes bien dedans !</p>
+			<small>Si jamais vous ne vous trouvez pas dans la liste, que vous aviez réservé une chambre au château de la Rocq et qu'il n'est pas marqué "OUI", alors contactez nous de toute urgence ! (c'est peut être simplement un bug d'affichage, mais il vaut mieux être sûr)</small>
+			<br />
+			<br />
+			<Guests />
+		</section>
 
+		<section>
+			<div class="title"></div>
+			<div class="message">
+				<p>Nous avons hâte de tous vous retrouver/rencontrer !</p>
+				<p>Gautier & AnnSo</p>
+			</div>
+		</section>
 	</div>
 </template>
 
 <script>
-import store from '@/store';
-
-import Headline from "@/components/Headline.vue";
 import Guests from "@/components/Guests.vue";
 
 export default {
 	name: "Login",
 	components: {
-		Headline,
 		Guests,
 	},
-	computed: {
-		isAuthenticated: () => store.getters.isAuthenticated,
-	}
 };
 </script>
 
 <style scoped lang="scss">
-.message-list {
-	font-size: 1rem;
-}
-
-.highlight {
-	color: #ffd54f;
-}
-
 .title {
 	position: relative;
 	display: inline-block;
@@ -112,14 +98,14 @@ export default {
 		z-index: -1;
 	}
 }
+
+.highlight {
+	color: #ffd54f;
+}
+
 .message {
 	font-size: 1rem;
 	line-height: 2em;
-}
-
-.content {
-	padding-left: 10%;
-	padding-right: 10%;
 }
 
 .bullet-list {
@@ -135,14 +121,5 @@ export default {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-}
-
-.wedding-list {
-	a {
-		text-decoration: none;
-	}
-	position: absolute;
-	top: 10px;
-	right: 25px;
 }
 </style>
