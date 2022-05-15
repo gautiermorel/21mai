@@ -26,7 +26,7 @@
 					<p v-if="data.invitation.type === 'DINER'">Dispo le 17 mai</p>
 				</template>
 			</Column>
-			<Column field="room" header="Chambre à la Rocq" headerClass="flex justify-content-center">
+			<Column field="room" :sortable="true" header="Chambre à la Rocq" headerClass="flex justify-content-center">
 				<template #body="{data}">
 					<div class="flex justify-content-center">
 						<Tag :value="data.room" :severity="data.room === 'OUI' ? 'success' : 'danger'"></Tag>
