@@ -54,7 +54,7 @@
 		<section class="my-8 md:my-6">
 			<div class="title">Liste des invités présents <span class="highlight">☆</span></div>
 			<p>Vérifiez que vous êtes bien dedans !</p>
-			<small>Si jamais vous ne vous trouvez pas dans la liste, que vous aviez réservé une chambre au château de la Rocq et qu'il n'est pas marqué "OUI", alors contactez nous de toute urgence ! (c'est peut être simplement un bug d'affichage, mais il vaut mieux être sûr)</small>
+			<small>Si jamais vous ne vous trouvez pas dans la liste, que vous aviez réservé une chambre au château de la Rocq et qu'il n'y a pas l'icone verte, alors contactez nous de toute urgence ! (c'est peut être simplement un bug d'affichage, mais il vaut mieux être sûr)</small>
 			<br />
 			<br />
 			<Guests />

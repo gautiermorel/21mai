@@ -5,7 +5,7 @@
 				<div class="flex">
 					<span class="p-input-icon-left">
 						<i class="pi pi-search" />
-						<InputText v-model="filters['global'].value" placeholder="Recherchez" />
+						<InputText v-model="filters['global'].value" placeholder="Prénom ou nom" />
 					</span>
 				</div>
 			</template>
@@ -21,16 +21,12 @@
 					<span class="image-text">{{data.invitation.type}}</span>
 				</template>
 			</Column>
-			<Column field="table" header="Table">
-				<template #body="{data}">
-					<p v-if="data.invitation.type === 'DINER'">Dispo le 17 mai</p>
-				</template>
-			</Column>
+			<Column field="table" :sortable="true" header="Table"></Column>
 			<Column field="room" :sortable="true" header="Chambre à la Rocq" headerClass="flex justify-content-center">
 				<template #body="{data}">
 					<div class="flex justify-content-center">
-						<unicon v-if="data.room === 'OUI'" viewBox="0 0 384 512" fill="green" height="2.5em" width="2.5em" name="go-house-circle-check" />
-						<unicon v-else fill="red" viewBox="0 0 384 512" height="2.5em" width="2.5em" name="go-house-circle-xmark" />
+						<unicon v-if="data.room === 'OUI'" viewBox="0 0 384 512" fill="#22C55E" height="2.5em" width="2.5em" name="go-house-circle-check" />
+						<unicon v-else fill="#EF4444" viewBox="0 0 384 512" height="2.5em" width="2.5em" name="go-house-circle-xmark" />
 					</div>
 				</template>
 			</Column>
